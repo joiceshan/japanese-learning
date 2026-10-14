@@ -975,27 +975,68 @@ function showToast(msg){
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>{ el.style.opacity='0' },3600);
 }
+// 在线发音降级：夸克 / UC / QQ 浏览器等内核没有 speechSynthesis，改用国内可直连的 TTS 音频
+let audioEl=null,audioSeq=0;
+const TTS_HOSTS=[
+  t=>'https://fanyi.baidu.com/gettts?lan=jp&text='+encodeURIComponent(t)+'&spd=3&source=web',
+  t=>'https://translate.google.com/translate_tts?ie=UTF-8&tl=ja&client=tw-ob&q='+encodeURIComponent(t)
+];
+function onlineSpeak(text){
+  try{
+    if(!audioEl){
+      audioEl=new Audio();
+      audioEl.preload='auto';
+      // 百度 TTS 对带外站 Referer 的请求会返回空内容，声明不发送 Referer
+      if('referrerPolicy' in audioEl)audioEl.referrerPolicy='no-referrer';
+    }
+    try{audioEl.pause()}catch(e){}
+    const seq=++audioSeq;
+    let idx=0;
+    const trySrc=()=>{
+      const myIdx=idx;
+      audioEl.src=TTS_HOSTS[idx](text);
+      audioEl.onerror=()=>{
+        if(seq!==audioSeq||myIdx!==idx)return;
+        idx++;
+        if(idx<TTS_HOSTS.length)trySrc();else showToast('发音加载失败，请检查网络后重试');
+      };
+      const p=audioEl.play();
+      if(p&&p.catch)p.catch(()=>{
+        if(seq!==audioSeq||myIdx!==idx)return;
+        idx++;
+        if(idx<TTS_HOSTS.length)trySrc();else showToast('请再点一次卡片试试');
+      });
+    };
+    trySrc();
+  }catch(e){ showToast('当前浏览器无法发音，请换用 Chrome 浏览器打开') }
+}
+let speakToken=0;
 function doSpeak(text){
+  const myToken=++speakToken;
+  let started=false,fellBack=false;
+  const fallback=()=>{ if(!fellBack){fellBack=true;onlineSpeak(text)} };
   try{
     const u=new SpeechSynthesisUtterance(text);
     u.lang='ja-JP';u.rate=0.8;u.pitch=1;u.volume=1;
     if(jaVoice)u.voice=jaVoice;
+    u.onstart=()=>{started=true};
     u.onerror=ev=>{
       const e=(ev&&ev.error)||'';
       if(e==='interrupted'||e==='canceled')return;
-      showToast('朗读失败（'+e+'）。请在系统「设置 → 语言与输入法 → 文字转语音」里安装日语语音包');
+      if(speakToken===myToken)fallback();   // 语音引擎报错（如缺日语语音包）→ 在线发音兜底
     };
     curUtter=u;   // 保持引用，避免被垃圾回收导致无声
     speechSynthesis.speak(u);
-  }catch(e){ showToast('朗读失败，请再点一次试试') }
+    // 看门狗：部分国产浏览器 speechSynthesis 存在但 speak() 静默失败，800ms 没出声就走在线发音
+    setTimeout(()=>{
+      if(speakToken===myToken&&!started&&!fellBack
+        &&!speechSynthesis.speaking&&!speechSynthesis.pending)fallback();
+    },800);
+  }catch(e){ onlineSpeak(text) }
 }
 function speak(text){
-  if(!('speechSynthesis' in window)){ showToast('当前浏览器不支持朗读，建议用 Chrome 或 Safari 打开'); return }
+  if(!('speechSynthesis' in window)){ onlineSpeak(text); return }
   if(!voicesLoaded)pickVoice();
-  if(!jaVoice&&jaVoices().length&&!warnedNoVoice){
-    warnedNoVoice=true;
-    showToast('这台设备没装日文语音包，发音可能不准。可在系统「语言与输入法」里添加日语语音。');
-  }
   // Android Chrome 在 cancel() 之后立刻 speak() 会被静默丢弃，必须留出间隔；
   // 没有正在播放时同步 speak()，以保留 iOS 的手势上下文。
   if(speechSynthesis.speaking||speechSynthesis.pending){
