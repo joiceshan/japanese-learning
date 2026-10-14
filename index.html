@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日语小站 · 零基础轻松学日语</title>
+<style>
+:root{
+  --bg:#fbf7f1;
+  --card:#ffffff;
+  --ink:#3a3042;
+  --muted:#9b8fa3;
+  --pink:#e8638c;
+  --pink-deep:#d94f7a;
+  --pink-soft:#fdeef3;
+  --aoi:#4a6fa5;
+  --aoi-soft:#eaf1f9;
+  --matcha:#6ea55c;
+  --matcha-soft:#edf6ea;
+  --gold:#e2a13c;
+  --gold-soft:#fdf3e3;
+  --line:#f0e3e8;
+  --shadow:0 6px 24px rgba(232,99,140,.08);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;
+}
+.jp-font{font-family:"Hiragino Sans","Yu Gothic","Meiryo","Noto Sans JP",sans-serif}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* ============ 导航 ============ */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,247,241,.88);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{max-width:1060px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;color:var(--pink-deep);white-space:nowrap;text-decoration:none}
+.logo .sakura{font-size:22px}
+.nav-tabs{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab{
+  padding:8px 14px;border-radius:999px;border:none;background:transparent;
+  color:var(--muted);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;
+  transition:all .2s;font-family:inherit;
+}
+.tab:hover{background:var(--pink-soft);color:var(--pink-deep)}
+.tab.active{background:var(--pink);color:#fff;box-shadow:0 4px 12px rgba(232,99,140,.3)}
+
+/* ============ 页面 ============ */
+.page{display:none;animation:fadeIn .35s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+section.page{padding:28px 0 70px}
+.page-hero{margin-bottom:24px}
+.page-hero h1{font-size:28px;margin-bottom:6px}
+.page-hero .sub{color:var(--muted);font-size:15px}
+.badge{display:inline-block;padding:3px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:10px}
+
+/* ============ 卡片 ============ */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);padding:24px;margin-bottom:20px}
+.card h2{font-size:20px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card h3{font-size:16px;margin-bottom:10px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.g3,.g4{grid-template-columns:1fr}}
+
+/* ============ 按钮 ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;
+  padding:10px 22px;border-radius:999px;font-size:15px;font-weight:700;
+  background:var(--pink);color:#fff;transition:all .2s;font-family:inherit;
+  box-shadow:0 4px 14px rgba(232,99,140,.28);
+}
+.btn:hover{background:var(--pink-deep);transform:translateY(-1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn.ghost{background:#fff;color:var(--pink-deep);border:1.5px solid var(--pink);box-shadow:none}
+.btn.ghost:hover{background:var(--pink-soft)}
+.btn.small{padding:6px 14px;font-size:13px}
+.btn.matcha{background:var(--matcha);box-shadow:0 4px 14px rgba(110,165,92,.28)}
+.btn.matcha:hover{background:#5d944c}
+.btn.aoi{background:var(--aoi);box-shadow:0 4px 14px rgba(74,111,165,.28)}
+.btn.aoi:hover{background:#3d5f92}
+
+/* ============ 首页 ============ */
+.hero{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;
+  padding:34px 0 10px;
+}
+@media(max-width:820px){.hero{grid-template-columns:1fr}}
+.hero h1{font-size:36px;line-height:1.3;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero p{color:#6d6178;font-size:16px;margin-bottom:20px}
+.hero-img{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);background:linear-gradient(135deg,#fdeef3,#eaf1f9)}
+.hero-img img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.stat-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 16px;text-align:center;flex:1;min-width:110px}
+.chip b{display:block;font-size:22px;color:var(--pink-deep)}
+.chip span{font-size:12px;color:var(--muted)}
+.feature{cursor:pointer;transition:all .2s;position:relative}
+.feature:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(232,99,140,.14)}
+.feature .ico{font-size:30px;margin-bottom:8px;display:block}
+.feature b{font-size:16px}
+.feature p{font-size:13px;color:var(--muted);margin-top:4px}
+.tip-list li{margin:8px 0 8px 4px;padding-left:2px;list-style:none;font-size:14.5px}
+.tip-list li b{color:var(--pink-deep)}
+.routine{display:grid;gap:8px}
+.routine .row{display:flex;gap:12px;align-items:center;background:var(--pink-soft);border-radius:12px;padding:10px 16px}
+.routine .row b{color:var(--pink-deep);min-width:64px;font-size:15px}
+
+/* ============ 学习路线 ============ */
+.phase-card{border-radius:var(--radius);border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+.phase-head{padding:20px 24px;color:#fff}
+.phase-head h2{font-size:19px;margin:0}
+.phase-head .goal{font-size:13px;opacity:.92;margin-top:4px}
+.phase-body{padding:18px 24px 22px}
+.week{border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:12px;background:#fdfcfa}
+.week-title{font-weight:800;font-size:15px;margin-bottom:6px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.week-title .wk{background:var(--pink-soft);color:var(--pink-deep);border-radius:8px;padding:1px 10px;font-size:12.5px}
+.task{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font-size:14px;cursor:pointer;color:#5a4f63}
+.task input{margin-top:5px;accent-color:var(--pink);width:16px;height:16px;cursor:pointer}
+.task.done{color:#b9aebf;text-decoration:line-through}
+.pbar{height:8px;background:rgba(255,255,255,.35);border-radius:99px;overflow:hidden;margin-top:10px}
+.pbar i{display:block;height:100%;background:#fff;border-radius:99px;transition:width .4s}
+
+/* ============ 五十音 ============ */
+.kana-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;box-shadow:var(--shadow)}
+.seg button{border:none;background:transparent;padding:7px 18px;border-radius:999px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;font-family:inherit}
+.seg button.on{background:var(--pink);color:#fff}
+.kana-sec{margin-bottom:26px}
+.kana-sec h3{font-size:16px;margin-bottom:12px;color:var(--pink-deep);display:flex;align-items:center;gap:8px}
+.kana-sec h3 small{color:var(--muted);font-weight:400;font-size:12px}
+.kana-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:10px}
+.kana-row-label{grid-column:1/-1;font-size:13px;color:var(--muted);font-weight:700;margin-top:4px}
+.kcell{
+  position:relative;background:#fff;border:1.5px solid var(--line);border-radius:14px;
+  padding:14px 6px 10px;text-align:center;cursor:pointer;transition:all .15s;user-select:none;
+}
+.kcell:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:0 6px 16px rgba(232,99,140,.15)}
+.kcell .char{font-size:27px;line-height:1.2;display:block}
+.kcell .rom{font-size:12px;color:var(--muted);display:block;margin-top:2px}
+.kcell .star{
+  position:absolute;top:5px;right:6px;font-size:13px;opacity:.25;cursor:pointer;transition:transform .15s;
+  background:none;border:none;padding:2px;font-family:inherit;
+}
+.kcell .star:hover{transform:scale(1.25)}
+.kcell.done{background:var(--gold-soft);border-color:#f3d9a8}
+.kcell.done .star{opacity:1}
+.no-romaji .kcell .rom{visibility:hidden}
+.mnem{background:var(--aoi-soft);border-radius:14px;padding:14px 18px;font-size:14px;color:#41597d;margin-top:12px}
+.mnem b{color:var(--aoi)}
+
+/* ============ 词汇 ============ */
+.cat-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pill{
+  border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;
+  font-size:14px;font-weight:600;color:#6d6178;cursor:pointer;transition:all .15s;font-family:inherit;
+}
+.pill:hover{border-color:var(--pink);color:var(--pink-deep)}
+.pill.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.vcard{
+  position:relative;background:#fff;border:1.5px solid var(--line);border-radius:16px;
+  padding:16px 14px 12px;cursor:pointer;transition:all .15s;text-align:center;
+}
+.vcard:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:0 6px 16px rgba(232,99,140,.14)}
+.vcard .jp{font-size:22px;font-weight:700}
+.vcard .kn{font-size:13px;color:var(--aoi);margin-top:2px}
+.vcard .cn{font-size:14px;color:#6d6178;margin-top:6px;border-top:1px dashed var(--line);padding-top:6px}
+.vcard .star{position:absolute;top:6px;right:9px;font-size:14px;opacity:.22;background:none;border:none;cursor:pointer;font-family:inherit}
+.vcard.done{background:var(--matcha-soft);border-color:#cfe3c8}
+.vcard.done .star{opacity:1}
+.hide-cn .vcard .cn{visibility:hidden}
+.flash-wrap{max-width:420px;margin:0 auto;text-align:center}
+.flash{
+  background:linear-gradient(150deg,#fff,#fdf3f6);border:2px solid var(--pink);
+  border-radius:22px;padding:44px 24px;min-height:230px;display:flex;flex-direction:column;
+  justify-content:center;cursor:pointer;box-shadow:var(--shadow);transition:transform .2s;
+}
+.flash:active{transform:scale(.98)}
+.flash .big{font-size:38px;font-weight:800;line-height:1.3}
+.flash .read{color:var(--aoi);font-size:17px;margin-top:8px}
+.flash .hint{color:var(--muted);font-size:12.5px;margin-top:16px}
+.flash-ctrl{display:flex;justify-content:center;gap:10px;margin-top:16px}
+.flash-idx{color:var(--muted);font-size:13px;margin-top:12px}
+
+/* ============ 语法 ============ */
+.gram-item{border:1px solid var(--line);border-radius:16px;background:#fff;margin-bottom:12px;overflow:hidden}
+.gram-item summary{
+  padding:15px 20px;cursor:pointer;font-weight:800;font-size:15.5px;list-style:none;
+  display:flex;align-items:center;gap:10px;user-select:none;
+}
+.gram-item summary::-webkit-details-marker{display:none}
+.gram-item summary::after{content:"▸";margin-left:auto;color:var(--muted);transition:transform .2s}
+.gram-item[open] summary::after{transform:rotate(90deg)}
+.gram-item summary .pt{color:var(--pink);font-size:19px;font-weight:900}
+.gram-body{padding:2px 22px 18px;font-size:14.5px;color:#5a4f63}
+.gram-body .explain{margin-bottom:10px}
+.ex-line{
+  background:#faf6f8;border-left:3px solid var(--pink);border-radius:0 10px 10px 0;
+  padding:8px 14px;margin:8px 0;display:flex;gap:10px;align-items:flex-start;
+}
+.ex-line .jp-t{font-weight:700;font-size:15.5px}
+.ex-line .tr{color:var(--muted);font-size:13.5px;display:block}
+.spk{
+  border:none;background:var(--aoi-soft);color:var(--aoi);width:28px;height:28px;border-radius:50%;
+  cursor:pointer;font-size:13px;flex-shrink:0;margin-top:2px;font-family:inherit;
+}
+.spk:hover{background:var(--aoi);color:#fff}
+
+/* ============ 会话 ============ */
+.scene-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.dlg-line{display:flex;gap:12px;margin-bottom:6px}
+.dlg-line .who{
+  flex-shrink:0;width:64px;text-align:center;font-size:12px;font-weight:800;color:var(--aoi);
+  background:var(--aoi-soft);border-radius:10px;padding:4px 2px;height:fit-content;margin-top:8px;
+}
+.dlg-bubble{flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 16px}
+.dlg-bubble .jp-t{font-weight:700;font-size:16px;cursor:pointer}
+.dlg-bubble .jp-t:hover{color:var(--pink-deep)}
+.dlg-bubble .kn{color:var(--aoi);font-size:13px}
+.dlg-bubble .tr{color:var(--muted);font-size:13.5px}
+.scene-note{background:var(--gold-soft);border-radius:12px;padding:10px 16px;font-size:13.5px;color:#8a6d3b;margin-bottom:14px}
+
+/* ============ 测验 ============ */
+.quiz-mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.quiz-mode-cards{grid-template-columns:1fr}}
+.qcard{cursor:pointer;transition:all .2s;text-align:center;padding:30px 20px}
+.qcard:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(232,99,140,.16)}
+.qcard .ico{font-size:40px}
+.qcard b{font-size:18px;display:block;margin:8px 0 4px}
+.qcard p{font-size:13px;color:var(--muted)}
+.quiz-box{max-width:520px;margin:0 auto;text-align:center}
+.q-progress{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:14px}
+.q-progress .bar{flex:1;height:8px;background:var(--pink-soft);border-radius:99px;margin:8px 14px 0;overflow:hidden}
+.q-progress .bar i{display:block;height:100%;background:var(--pink);border-radius:99px;transition:width .3s}
+.q-prompt{font-size:64px;font-weight:900;margin:26px 0 8px;min-height:90px;display:flex;align-items:center;justify-content:center;gap:12px}
+.q-prompt.small{font-size:34px}
+.q-sub{color:var(--aoi);font-size:17px;margin-bottom:26px}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.q-opts{grid-template-columns:1fr}}
+.q-opt{
+  background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 10px;
+  font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;color:var(--ink);
+}
+.q-opt:hover{border-color:var(--pink);background:var(--pink-soft)}
+.q-opt.ok{border-color:var(--matcha);background:var(--matcha-soft);color:var(--matcha)}
+.q-opt.no{border-color:#e57373;background:#fdecec;color:#c62828}
+.q-feed{min-height:30px;margin-top:16px;font-weight:700;font-size:15px}
+.q-feed.ok{color:var(--matcha)}
+.q-feed.no{color:#c62828}
+.q-result .score{font-size:56px;font-weight:900;color:var(--pink-deep)}
+.q-result .best{color:var(--muted);font-size:14px;margin:6px 0 20px}
+
+/* ============ 进度 ============ */
+.checkin-card{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.checkin-left{flex:1;min-width:220px}
+.checkin-left .big-num{font-size:44px;font-weight:900;color:var(--pink-deep)}
+.checkin-left .big-num small{font-size:15px;color:var(--muted);font-weight:400}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;flex:1;min-width:250px}
+.cal .day{
+  aspect-ratio:1;border-radius:8px;background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);
+}
+.cal .day.hit{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:800}
+.cal .day.today{outline:2px solid var(--gold);outline-offset:1px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:720px){.stat-grid{grid-template-columns:1fr 1fr}}
+.stat-cell{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
+.stat-cell b{display:block;font-size:26px}
+.stat-cell span{font-size:12.5px;color:var(--muted)}
+.stat-cell.c1 b{color:var(--pink-deep)}
+.stat-cell.c2 b{color:var(--aoi)}
+.stat-cell.c3 b{color:var(--matcha)}
+.stat-cell.c4 b{color:var(--gold)}
+
+footer{border-top:1px solid var(--line);padding:26px 20px 34px;text-align:center;color:var(--muted);font-size:13px}
+footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#home" onclick="go('home')"><span class="sakura">🌸</span>日语小站</a>
+    <div class="nav-tabs" id="navTabs">
+      <button class="tab" data-p="home">🏠 首页</button>
+      <button class="tab" data-p="roadmap">🗺️ 学习路线</button>
+      <button class="tab" data-p="kana">あ 五十音</button>
+      <button class="tab" data-p="vocab">📚 词汇</button>
+      <button class="tab" data-p="grammar">✏️ 语法</button>
+      <button class="tab" data-p="talk">💬 会话</button>
+      <button class="tab" data-p="quiz">🎯 测验</button>
+      <button class="tab" data-p="progress">📊 学习进度</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= 首页 ================= -->
+<section class="page" id="page-home">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>こんにちは！<br>四个月，<em>轻松</em>学会日语</h1>
+        <p>专为零基础小白设计：每天只要 30 分钟，跟着路线图一步步走，
+        从五十音到日常会话，不知不觉就能看懂动漫里的简单对话。</p>
+        <button class="btn" onclick="go('roadmap')">🗺️ 开始我的学习之旅</button>
+        <div class="stat-chips" id="homeStats"></div>
+      </div>
+      <div class="hero-img">
+        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=soft%20flat%20vector%20illustration%2C%20Mount%20Fuji%20with%20cherry%20blossom%20sakura%20trees%2C%20red%20torii%20gate%2C%20flying%20cranes%2C%20pastel%20pink%20and%20cream%20palette%2C%20kawaii%20minimal%20clean%20style%2C%20gentle%20warm%20light%2C%20Japanese%20learning%20theme%2C%20no%20text&image_size=landscape_16_9"
+             alt="富士山与樱花插画" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-top:26px">
+      <div class="card feature" onclick="go('kana')"><span class="ico">あ</span><b>五十音图</b><p>点击发音，逐个点亮假名</p></div>
+      <div class="card feature" onclick="go('vocab')"><span class="ico">📚</span><b>150+ 核心词汇</b><p>分类记忆 + 闪卡模式</p></div>
+      <div class="card feature" onclick="go('grammar')"><span class="ico">✏️</span><b>入门语法</b><p>12 个 N5 语法点，一看就懂</p></div>
+      <div class="card feature" onclick="go('quiz')"><span class="ico">🎯</span><b>趣味测验</b><p>假名、词汇随时检验</p></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:4px">
+      <div class="card">
+        <h2>⏰ 每天 30 分钟这样安排</h2>
+        <div class="routine">
+          <div class="row"><b>5 分钟</b>复习昨天学的假名 / 单词（滚雪球式复习）</div>
+          <div class="row"><b>15 分钟</b>学习新内容：跟路线图走</div>
+          <div class="row"><b>5 分钟</b>来一局小测验巩固</div>
+          <div class="row"><b>5 分钟</b>大声跟读发音（语言是"说"会的）</div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>💡 轻松学习小贴士</h2>
+        <ul class="tip-list">
+          <li>📺 <b>看动漫学</b>：挑喜欢的番剧，先看熟肉记情节，再挑一集看生肉磨耳朵。</li>
+          <li>🍬 <b>别死记硬背</b>：碎片时间刷闪卡，比抱着单词书背 1 小时更有效。</li>
+          <li>🗣️ <b>大声读出来</b>：说错了也没关系，敢开口才能进步。</li>
+          <li>📅 <b>允许偷懒</b>：哪天实在没时间，就点个"打卡"保持连续记录，别断心态。</li>
+          <li>🌸 <b>记住初心</b>：学日语是为了追番、旅行、追星，享受过程最重要。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 学习路线 ================= -->
+<section class="page" id="page-roadmap">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--aoi-soft);color:var(--aoi)">16 周 · 4 个阶段</span>
+      <h1>🗺️ 四个月学习路线</h1>
+      <div class="sub">从零基础到 JLPT N5 水平。每完成一项就勾选，进度会自动保存。</div>
+    </div>
+    <div id="roadmapList"></div>
+    <div class="card" style="background:var(--pink-soft);border-color:#f6d3e0">
+      <h2>📌 路线使用说明</h2>
+      <ul class="tip-list">
+        <li>每周开始时看一眼本周任务，任务量都不大，完成一项勾一项。</li>
+        <li>如果某周没完成，<b>不要跳过</b>，顺延即可——学得稳比学得快重要。</li>
+        <li>词汇、语法任务都可以直接跳转到对应页面学习（点上面导航就行）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 五十音 ================= -->
+<section class="page" id="page-kana">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--pink-soft);color:var(--pink-deep)">日语的 "拼音表"</span>
+      <h1>あ 五十音图</h1>
+      <div class="sub">点击任意假名听发音，点亮星星标记已掌握。全部点亮 = 第一关通关！</div>
+    </div>
+    <div class="kana-toolbar">
+      <div class="seg">
+        <button id="btnHira" class="on" onclick="setKanaMode('h')">平假名</button>
+        <button id="btnKata" onclick="setKanaMode('k')">片假名</button>
+      </div>
+      <button class="btn ghost small" id="btnRomaji" onclick="toggleRomaji()">🙈 隐藏罗马音（自测）</button>
+      <span style="font-size:13px;color:var(--muted)" id="kanaCount"></span>
+    </div>
+    <div id="kanaArea"></div>
+    <div class="mnem">
+      💡 <b>记忆小妙招</b>：不用一次背完！每天只攻 1～2 行（5～10 个），
+      结合词来记更容易——比如记住 <b>あめ</b>(雨)、<b>すし</b>(寿司)、<b>ねこ</b>(猫) 这些词，
+      假名自然就记住了。片假名主要是用来写外来语的，比如 <b>コーヒー</b>(coffee 咖啡)。
+    </div>
+  </div>
+</section>
+
+<!-- ================= 词汇 ================= -->
+<section class="page" id="page-vocab">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--matcha-soft);color:var(--matcha)">N5 核心 150 词</span>
+      <h1>📚 分类词汇</h1>
+      <div class="sub">点卡片听发音、点星星标记已背会。用「闪卡模式」自查效果最好。</div>
+    </div>
+    <div class="cat-pills" id="catPills"></div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="btn small" id="btnFlash" onclick="startFlash()">🃏 闪卡模式</button>
+      <button class="btn ghost small" id="btnHideCn" onclick="toggleHideCn()">🙈 遮住中文意思（自测）</button>
+      <span style="font-size:13px;color:var(--muted);align-self:center" id="vocabCount"></span>
+    </div>
+    <div id="flashArea" style="display:none"></div>
+    <div class="vgrid" id="vocabGrid"></div>
+  </div>
+</section>
+
+<!-- ================= 语法 ================= -->
+<section class="page" id="page-grammar">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--gold-soft);color:var(--gold)">N5 入门 12 讲</span>
+      <h1>✏️ 基础语法</h1>
+      <div class="sub">每讲 2 分钟看完。点击例句可以听发音。建议配合路线图每周学 2～3 讲。</div>
+    </div>
+    <div id="grammarList"></div>
+  </div>
+</section>
+
+<!-- ================= 会话 ================= -->
+<section class="page" id="page-talk">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--aoi-soft);color:var(--aoi)">5 大日常场景</span>
+      <h1>💬 实用会话</h1>
+      <div class="sub">点击日语句子听发音。先自己读一遍，再看中文意思，最后跟读 3 遍。</div>
+    </div>
+    <div class="scene-tabs" id="sceneTabs"></div>
+    <div id="sceneBody"></div>
+  </div>
+</section>
+
+<!-- ================= 测验 ================= -->
+<section class="page" id="page-quiz">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--pink-soft);color:var(--pink-deep)">每次 10 题</span>
+      <h1>🎯 趣味测验</h1>
+      <div class="sub">测一测今天的成果，最佳纪录会自动保存。</div>
+    </div>
+    <div id="quizHome">
+      <div class="quiz-mode-cards">
+        <div class="card qcard" onclick="startQuiz('kana')">
+          <span class="ico">あ</span><b>假名测验</b><p>看假名选读音 · 10 题</p>
+          <p style="margin-top:8px;font-weight:700;color:var(--gold)">🏆 最佳：<span id="bestKana">0</span> / 10</p>
+        </div>
+        <div class="card qcard" onclick="startQuiz('vocab')">
+          <span class="ico">📖</span><b>词汇测验</b><p>看日语选中文 · 10 题</p>
+          <p style="margin-top:8px;font-weight:700;color:var(--gold)">🏆 最佳：<span id="bestVocab">0</span> / 10</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:20px;background:var(--aoi-soft);border-color:#d9e5f2">
+        <h3 style="margin-bottom:4px">🎧 测验前小建议</h3>
+        <p style="font-size:14px;color:#41597d">错题不用怕，错一遍往往比背三遍记得牢。测完把错的知识点回去再看一眼就好。</p>
+      </div>
+    </div>
+    <div id="quizPlay" style="display:none">
+      <div class="quiz-box">
+        <div class="q-progress"><span id="qNo">第 1 题</span><div class="bar"><i id="qBar" style="width:10%"></i></div><span id="qScore">得分 0</span></div>
+        <div class="q-prompt" id="qPrompt"></div>
+        <div class="q-sub" id="qSub"></div>
+        <div class="q-opts" id="qOpts"></div>
+        <div class="q-feed" id="qFeed"></div>
+        <button class="btn" id="qNext" style="display:none;margin-top:6px" onclick="nextQ()">下一题 →</button>
+      </div>
+    </div>
+    <div id="quizResult" style="display:none">
+      <div class="quiz-box q-result card">
+        <div class="score" id="rScore">8/10</div>
+        <div id="rMsg" style="font-size:15px;margin-top:4px">做得不错！</div>
+        <div class="best" id="rBest"></div>
+        <button class="btn" onclick="quitQuiz()">再来一局</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 进度 ================= -->
+<section class="page" id="page-progress">
+  <div class="wrap">
+    <div class="page-hero">
+      <span class="badge" style="background:var(--gold-soft);color:var(--gold)">坚持就是胜利</span>
+      <h1>📊 学习进度</h1>
+      <div class="sub">所有数据都保存在你的浏览器里，随时回来看。</div>
+    </div>
+    <div class="card">
+      <h2>📅 每日打卡</h2>
+      <div class="checkin-card">
+        <div class="checkin-left">
+          <div class="big-num"><span id="streakNum">0</span> 天<small> 连续打卡</small></div>
+          <p style="font-size:13px;color:var(--muted);margin:6px 0 14px">累计打卡 <b id="totalDays">0</b> 天</p>
+          <button class="btn matcha" id="btnCheckin" onclick="doCheckin()">✅ 今日打卡</button>
+        </div>
+        <div class="cal" id="calGrid"></div>
+      </div>
+    </div>
+    <div class="stat-grid" style="margin-bottom:20px">
+      <div class="stat-cell c1"><b id="stKana">0/104</b><span>已点亮假名</span></div>
+      <div class="stat-cell c2"><b id="stVocab">0/0</b><span>已背会词汇</span></div>
+      <div class="stat-cell c3"><b id="stQuiz">0</b><span>测验最佳均分</span></div>
+      <div class="stat-cell c4"><b id="stRoad">0%</b><span>路线完成度</span></div>
+    </div>
+    <div class="card" style="text-align:center">
+      <h2 style="justify-content:center">🌙 需要重新开始吗？</h2>
+      <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px">清空所有进度记录（假名、词汇、打卡、测验纪录），从零再来。</p>
+      <button class="btn ghost small" style="color:#c62828;border-color:#e57373" onclick="resetAll()">🗑️ 清空全部进度</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="jp-t jp-font">毎日少しずつ、楽しく日本語を勉強しましょう！</div>
+  <div>每天进步一点点，开开心心学日语 🌸</div>
+</footer>
+
+<script>
+/* ==================================================
+   数据区
+================================================== */
+// 五十音：清音
+const KANA_SEI=[
+  {label:'あ行',cells:[['あ','a'],['い','i'],['う','u'],['え','e'],['お','o']]},
+  {label:'か行',cells:[['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko']]},
+  {label:'さ行',cells:[['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so']]},
+  {label:'た行',cells:[['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to']]},
+  {label:'な行',cells:[['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no']]},
+  {label:'は行',cells:[['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho']]},
+  {label:'ま行',cells:[['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo']]},
+  {label:'や行',cells:[['や','ya'],null,['ゆ','yu'],null,['よ','yo']]},
+  {label:'ら行',cells:[['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro']]},
+  {label:'わ行',cells:[['わ','wa'],null,null,null,['を','wo']]},
+  {label:'拨音',cells:[['ん','n']]},
+];
+// 浊音 / 半浊音
+const KANA_DAKU=[
+  {label:'が行',cells:[['が','ga'],['ぎ','gi'],['ぐ','gu'],['げ','ge'],['ご','go']]},
+  {label:'ざ行',cells:[['ざ','za'],['じ','ji'],['ず','zu'],['ぜ','ze'],['ぞ','zo']]},
+  {label:'だ行',cells:[['だ','da'],['ぢ','ji'],['づ','zu'],['で','de'],['ど','do']]},
+  {label:'ば行',cells:[['ば','ba'],['び','bi'],['ぶ','bu'],['べ','be'],['ぼ','bo']]},
+  {label:'ぱ行',cells:[['ぱ','pa'],['ぴ','pi'],['ぷ','pu'],['ぺ','pe'],['ぽ','po']]},
+];
+// 拗音
+const KANA_YOU=[
+  {label:'きゃ行',cells:[['きゃ','kya'],['きゅ','kyu'],['きょ','kyo']]},
+  {label:'しゃ行',cells:[['しゃ','sha'],['しゅ','shu'],['しょ','sho']]},
+  {label:'ちゃ行',cells:[['ちゃ','cha'],['ちゅ','chu'],['ちょ','cho']]},
+  {label:'にゃ行',cells:[['にゃ','nya'],['にゅ','nyu'],['にょ','nyo']]},
+  {label:'ひゃ行',cells:[['ひゃ','hya'],['ひゅ','hyu'],['ひょ','hyo']]},
+  {label:'みゃ行',cells:[['みゃ','mya'],['みゅ','myu'],['みょ','myo']]},
+  {label:'りゃ行',cells:[['りゃ','rya'],['りゅ','ryu'],['りょ','ryo']]},
+  {label:'ぎゃ行',cells:[['ぎゃ','gya'],['ぎゅ','gyu'],['ぎょ','gyo']]},
+  {label:'じゃ行',cells:[['じゃ','ja'],['じゅ','ju'],['じょ','jo']]},
+  {label:'びゃ行',cells:[['びゃ','bya'],['びゅ','byu'],['びょ','byo']]},
+  {label:'ぴゃ行',cells:[['ぴゃ','pya'],['ぴゅ','pyu'],['ぴょ','pyo']]},
+];
+
+// 词汇（N5 核心）
+const VOCAB=[
+ {name:'👋 问候语',words:[
+  ['おはようございます','ohayou gozaimasu','早上好（礼貌）'],
+  ['こんにちは','konnichiwa','你好（白天）'],
+  ['こんばんは','konbanwa','晚上好'],
+  ['おやすみなさい','oyasuminasai','晚安'],
+  ['ありがとう','arigatou','谢谢'],
+  ['すみません','sumimasen','不好意思 / 打扰一下'],
+  ['ごめんなさい','gomennasai','对不起'],
+  ['はい','hai','是 / 好的'],
+  ['いいえ','iie','不是'],
+  ['さようなら','sayounara','再见'],
+  ['じゃあね','jaa ne','回头见（随意）'],
+  ['はじめまして','hajimemashite','初次见面'],
+  ['どうぞよろしく','douzo yoroshiku','请多关照'],
+  ['お元気ですか','o-genki desu ka','你好吗？'],
+  ['ただいま','tadaima','我回来了'],
+  ['おかえり','okaeri','你回来啦'],
+ ]},
+ {name:'🔢 数字',words:[
+  ['零 / ゼロ','rei / zero','0'],
+  ['一','ichi','1'],
+  ['二','ni','2'],
+  ['三','san','3'],
+  ['四','shi / yon','4'],
+  ['五','go','5'],
+  ['六','roku','6'],
+  ['七','shichi / nana','7'],
+  ['八','hachi','8'],
+  ['九','kyuu','9'],
+  ['十','juu','10'],
+  ['百','hyaku','100'],
+  ['千','sen','1000'],
+  ['万','man','10000'],
+  ['いくつ','ikutsu','几个？'],
+  ['いくら','ikura','多少钱？'],
+ ]},
+ {name:'⏰ 时间·日期',words:[
+  ['今日','kyou','今天'],
+  ['明日','ashita','明天'],
+  ['昨日','kinou','昨天'],
+  ['今','ima','现在'],
+  ['朝','asa','早上'],
+  ['昼','hiru','中午'],
+  ['夜','yoru','晚上'],
+  ['月曜日','getsuyoubi','星期一'],
+  ['火曜日','kayoubi','星期二'],
+  ['水曜日','suiyoubi','星期三'],
+  ['木曜日','mokuyoubi','星期四'],
+  ['金曜日','kinyoubi','星期五'],
+  ['土曜日','doyoubi','星期六'],
+  ['日曜日','nichiyoubi','星期日'],
+  ['週','shuu','周 / 星期'],
+  ['年','toshi','年'],
+ ]},
+ {name:'👨‍👩‍👧 人·家庭',words:[
+  ['私','watashi','我'],
+  ['あなた','anata','你'],
+  ['彼','kare','他'],
+  ['彼女','kanojo','她 / 女朋友'],
+  ['家族','kazoku','家人'],
+  ['父','chichi','（我的）爸爸'],
+  ['母','haha','（我的）妈妈'],
+  ['兄','ani','（我的）哥哥'],
+  ['姉','ane','（我的）姐姐'],
+  ['弟','otouto','（我的）弟弟'],
+  ['妹','imouto','（我的）妹妹'],
+  ['友達','tomodachi','朋友'],
+  ['先生','sensei','老师'],
+  ['学生','gakusei','学生'],
+  ['人','hito','人'],
+  ['子供','kodomo','小孩'],
+ ]},
+ {name:'🍜 食物·饮品',words:[
+  ['水','mizu','水'],
+  ['お茶','ocha','茶'],
+  ['コーヒー','koohii','咖啡'],
+  ['牛乳','gyuunyuu','牛奶'],
+  ['ご飯','gohan','米饭 / 饭'],
+  ['パン','pan','面包'],
+  ['卵','tamago','鸡蛋'],
+  ['肉','niku','肉'],
+  ['魚','sakana','鱼'],
+  ['野菜','yasai','蔬菜'],
+  ['果物','kudamono','水果'],
+  ['りんご','ringo','苹果'],
+  ['朝ご飯','asagohan','早饭'],
+  ['昼ご飯','hirugohan','午饭'],
+  ['晩ご飯','bangohan','晚饭'],
+  ['おいしい','oishii','好吃的'],
+ ]},
+ {name:'🏃 动词',words:[
+  ['食べる','taberu','吃'],
+  ['飲む','nomu','喝'],
+  ['行く','iku','去'],
+  ['来る','kuru','来'],
+  ['見る','miru','看'],
+  ['聞く','kiku','听 / 问'],
+  ['話す','hanasu','说'],
+  ['読む','yomu','读'],
+  ['書く','kaku','写'],
+  ['買う','kau','买'],
+  ['する','suru','做'],
+  ['勉強する','benkyou suru','学习'],
+  ['寝る','neru','睡觉'],
+  ['起きる','okiru','起床'],
+  ['働く','hataraku','工作'],
+  ['遊ぶ','asobu','玩'],
+ ]},
+ {name:'🎨 形容词',words:[
+  ['大きい','ookii','大的'],
+  ['小さい','chiisai','小的'],
+  ['新しい','atarashii','新的'],
+  ['古い','furui','旧的'],
+  ['高い','takai','贵的 / 高的'],
+  ['安い','yasui','便宜的'],
+  ['いい','ii','好的'],
+  ['楽しい','tanoshii','快乐的'],
+  ['面白い','omoshiroi','有趣的'],
+  ['難しい','muzukashii','难的'],
+  ['易しい','yasashii','简单的 / 温柔的'],
+  ['暑い','atsui','（天气）热'],
+  ['寒い','samui','（天气）冷'],
+  ['元気','genki','有精神的（な形）'],
+  ['静か','shizuka','安静的（な形）'],
+  ['好き','suki','喜欢的（な形）'],
+ ]},
+ {name:'🏫 场所·国家',words:[
+  ['学校','gakkou','学校'],
+  ['会社','kaisha','公司'],
+  ['家','uchi / ie','家'],
+  ['駅','eki','车站'],
+  ['病院','byouin','医院'],
+  ['銀行','ginkou','银行'],
+  ['店','mise','商店'],
+  ['図書館','toshokkan','图书馆'],
+  ['日本','nihon','日本'],
+  ['中国','chuugoku','中国'],
+  ['東京','toukyou','东京'],
+ ]},
+ {name:'📖 学习·语言',words:[
+  ['日本語','nihongo','日语'],
+  ['中国語','chuugokugo','中文'],
+  ['英語','eigo','英语'],
+  ['言葉','kotoba','语言 / 词语'],
+  ['本','hon','书'],
+  ['雑誌','zasshi','杂志'],
+  ['新聞','shinbun','报纸'],
+  ['テレビ','terebi','电视'],
+  ['映画','eiga','电影'],
+  ['音楽','ongaku','音乐'],
+  ['漢字','kanji','汉字'],
+  ['宿題','shukudai','作业'],
+ ]},
+];
+
+// 语法（N5 入门 12 讲）
+const GRAMMAR=[
+ {t:'です',title:'……是……',exp:'最基础的判断词，放在句尾表示"是"，自带礼貌语气。',
+  lines:[['私は学生です。','Watashi wa gakusei desu.','我是学生。'],
+         ['田中さんは先生です。','Tanaka-san wa sensei desu.','田中先生是老师。'],
+         ['先生じゃありません。','Sensei ja arimasen.','不是老师。（否定形式）']]},
+ {t:'は',title:'主题标记「要说的是……」',exp:'放在主题后面，标记"接下来要聊这个"。注意：这里读 wa 不读 ha！',
+  lines:[['私はリンです。','Watashi wa Rin desu.','我是小林。'],
+         ['これは本です。','Kore wa hon desu.','这是书。']]},
+ {t:'か',title:'句尾一加，变成疑问',exp:'放在句尾表示疑问，相当于"……吗？"，不用加问号，语调也不必上扬。',
+  lines:[['あなたは学生ですか。','Anata wa gakusei desu ka.','你是学生吗？'],
+         ['これはいくらですか。','Kore wa ikura desu ka.','这个多少钱？']]},
+ {t:'の',title:'「的」——表示所属',exp:'连接两个名词，前面的名词修饰后面的名词。',
+  lines:[['私の本','watashi no hon','我的书'],
+         ['日本語の先生','nihongo no sensei','日语老师'],
+         ['学校の友達','gakkou no tomodachi','学校的朋友']]},
+ {t:'を',title:'动作的「对象」',exp:'标记动作承受的东西（他动词的对象），读作 o。',
+  lines:[['パンを食べます。','Pan o tabemasu.','吃面包。'],
+         ['水を飲みます。','Mizu o nomimasu.','喝水。'],
+         ['日本語を勉強します。','Nihongo o benkyou shimasu.','学日语。']]},
+ {t:'に',title:'时间点 · 去向',exp:'表示动作发生的时间点，或移动的目的地。',
+  lines:[['7時に起きます。','Shichi-ji ni okimasu.','7点起床。'],
+         ['学校に行きます。','Gakkou ni ikimasu.','去学校。'],
+         ['日本に行きたいです。','Nihon ni ikitai desu.','想去日本。']]},
+ {t:'で',title:'在哪里做 · 用什么做',exp:'表示动作发生的场所，或使用的工具、手段。',
+  lines:[['図書館で勉強します。','Toshokkan de benkyou shimasu.','在图书馆学习。'],
+         ['バスで行きます。','Basu de ikimasu.','坐公交去。'],
+         ['はしで食べます。','Hashi de tabemasu.','用筷子吃。']]},
+ {t:'が',title:'存在 · 好恶的对象',exp:'表示"有什么东西存在"，或用于好き（喜欢）、上手（擅长）等情感能力的对象。',
+  lines:[['猫がいます。','Neko ga imasu.','有猫。'],
+         ['水が好きです。','Mizu ga suki desu.','喜欢水。'],
+         ['日本語が上手です。','Nihongo ga jouzu desu.','日语很棒。']]},
+ {t:'も',title:'「也」',exp:'表示"也"，直接替换は的位置。',
+  lines:[['私も学生です。','Watashi mo gakusei desu.','我也是学生。'],
+         ['コーヒーもお願いします。','Koohii mo onegaishimasu.','咖啡也麻烦来一份。']]},
+ {t:'と',title:'「和」——连接名词',exp:'把两个名词并列起来。',
+  lines:[['犬と猫','inu to neko','狗和猫'],
+         ['母と姉がいます。','Haha to ane ga imasu.','有妈妈和姐姐。']]},
+ {t:'ます形',title:'动词的礼貌形（现在/过去/否定）',exp:'动词接ます是礼貌说法。否定把ます换成ません，过去式换成ました。',
+  lines:[['毎日日本語を勉強します。','Mainichi nihongo o benkyou shimasu.','每天学日语。'],
+         ['昨日映画を見ました。','Kinou eiga o mimashita.','昨天看了电影。'],
+         ['朝ご飯は食べません。','Asagohan wa tabemasen.','不吃早饭。']]},
+ {t:'形容词',title:'い形容词 / な形容词作谓语',exp:'い形容词直接加です；な形容词和名词一样直接加です。否定变化先记最常用的即可。',
+  lines:[['この本は高いです。','Kono hon wa takai desu.','这本书很贵。'],
+         ['ここは静かです。','Koko wa shizuka desu.','这里很安静。'],
+         ['今日は暑くないです。','Kyou wa atsuku nai desu.','今天不热。']]},
+];
+
+// 会话
+const TALKS=[
+ {name:'🤝 自我介绍',note:'初次见面的标准流程：はじめまして → 自报姓名 → よろしく。背下来，见到日本朋友直接用！',
+  lines:[['A','はじめまして。田中です。','Hajimemashite. Tanaka desu.','初次见面，我是田中。'],
+         ['B','はじめまして。李です。どうぞよろしく。','Hajimemashite. Ri desu. Douzo yoroshiku.','初次见面，我是小李，请多关照。'],
+         ['A','こちらこそ、よろしくお願いします。','Kochira koso, yoroshiku onegaishimasu.','我才要请您多关照。'],
+         ['B','李さんは学生ですか。','Ri-san wa gakusei desu ka.','小李是学生吗？'],
+         ['A','はい、大学の学生です。','Hai, daigaku no gakusei desu.','是的，是大学生。']]},
+ {name:'🌅 日常打招呼',note:'日本人对天气情有独钟，聊天气就是最安全的寒暄。',
+  lines:[['A','おはようございます。','Ohayou gozaimasu.','早上好！'],
+         ['B','おはようございます。今日もいい天気ですね。','Ohayou gozaimasu. Kyou mo ii tenki desu ne.','早上好！今天天气也不错呢。'],
+         ['A','そうですね。','Sou desu ne.','是啊。'],
+         ['B','じゃあ、また後で。','Jaa, mata ato de.','那么，回头见。']]},
+ {name:'🍜 餐厅点餐',note:'记住万能句「～を一つください」（请给我一份～），走到哪都能用。',
+  lines:[['店員','いらっしゃいませ。何名様ですか。','Irasshaimase. Nanmei-sama desu ka.','欢迎光临，请问几位？'],
+         ['客','二人です。','Futari desu.','两位。'],
+         ['店員','ご注文は何になさいますか。','Go-chuumon wa nan ni nasaimasu ka.','请问您要点什么？'],
+         ['客','ラーメンを一つと、ギョーザを一つください。','Raamen o hitotsu to, gyooza o hitotsu kudasai.','一份拉面和一份饺子。'],
+         ['店員','はい、少々お待ちください。','Hai, shoushou omachi kudasai.','好的，请稍等。']]},
+ {name:'🛍️ 购物',note:'「いくらですか」（多少钱）是购物第一句。付钱时店员说「いただきます」表示收下了。',
+  lines:[['客','すみません、これはいくらですか。','Sumimasen, kore wa ikura desu ka.','请问这个多少钱？'],
+         ['店員','それは500円です。','Sore wa gohyaku-en desu.','那个是500日元。'],
+         ['客','じゃ、これをください。','Ja, kore o kudasai.','那么，请给我这个。'],
+         ['店員','500円いただきます。ありがとうございます。','Gohyaku-en itadakimasu. Arigatou gozaimasu.','收您500日元，谢谢惠顾。']]},
+ {name:'🧭 问路',note:'迷路时先说「すみません」引起注意，再问「～はどこですか」。',
+  lines:[['A','すみません、駅はどこですか。','Sumimasen, eki wa doko desu ka.','请问，车站在哪里？'],
+         ['B','この道をまっすぐ行ってください。','Kono michi o massugu itte kudasai.','请沿着这条路一直走。'],
+         ['A','どのくらいかかりますか。','Dono kurai kakarimasu ka.','大概要多久？'],
+         ['B','歩いて5分です。','Aruite go-fun desu.','走路5分钟。'],
+         ['A','ありがとうございます！','Arigatou gozaimasu!','谢谢！']]},
+];
+
+// 学习路线：4 阶段 16 周
+const ROADMAP=[
+ {name:'第 1 阶段 · 假名入门',goal:'目标：流利读出所有五十音',color:'#e8638c',weeks:[
+  {t:'第 1 周',tasks:['学习あ行～さ行平假名（15个，每天5个）','每个假名抄写 3 遍 + 点击网站听发音跟读','记住 3 个小词：あめ(雨)、すし(寿司)、おかね(钱)']},
+  {t:'第 2 周',tasks:['学习た行～ん平假名（剩余 31 个）','平假名整体认读一遍，圈出还不熟的','用平假名试着读一读「ねこ」「さくら」']},
+  {t:'第 3 周',tasks:['学习片假名全部（和清音一一对应，会轻松很多）','认识浊音が行～ぱ行','练习读外来语：コーヒー、テレビ、アイス']},
+  {t:'第 4 周',tasks:['浊音 / 半浊音 / 拗音专项巩固','做一次「假名测验」，正确率达到 90%+','开始背第一组词汇：问候语']},
+ ]},
+ {name:'第 2 阶段 · 词汇 + 基础语法',goal:'目标：掌握 150+ 词汇和基础句型',color:'#4a6fa5',weeks:[
+  {t:'第 5 周',tasks:['背熟「问候语」16 个词','背「数字」1～10000','学语法：です、は']},
+  {t:'第 6 周',tasks:['背「时间·日期」16 个词','背「人·家庭」16 个词','学语法：か、の']},
+  {t:'第 7 周',tasks:['背「食物·饮品」16 个词','认读「动词」16 个（会读即可）','学语法：を、に']},
+  {t:'第 8 周',tasks:['背「形容词」16 个词','学语法：で、が','做一次「词汇测验」，巩固前几周内容']},
+ ]},
+ {name:'第 3 阶段 · 会话进阶',goal:'目标：N5 语法收官，敢开口对话',color:'#6ea55c',weeks:[
+  {t:'第 9 周',tasks:['背「场所·国家」+「学习·语言」词表','学语法：も、と','跟读「自我介绍」对话 3 遍并试着背下来']},
+  {t:'第 10 周',tasks:['学语法：ます形（动词礼貌形）','学语法：形容词作谓语','跟读「日常打招呼」对话']},
+  {t:'第 11 周',tasks:['复习全部 12 讲语法，整理自己的错题本','跟读「餐厅点餐」对话','试着用日语写一段 3 句的自我介绍']},
+  {t:'第 12 周',tasks:['跟读「购物」「问路」对话','假名测验冲刺满分','看一集带日文字幕的动漫（生肉+日字）']},
+ ]},
+ {name:'第 4 阶段 · 巩固拓展',goal:'目标：N5 水平达成，向 N4 进发',color:'#e2a13c',weeks:[
+  {t:'第 13 周',tasks:['词汇测验达到 90%+','把 12 讲语法的例句全部朗读一遍','每天听 10 分钟日语慢速材料（动画音频即可）']},
+  {t:'第 14 周',tasks:['开始接触 て形（N4 内容，混个脸熟）','复习形容词和助词，重点是自己容易错的部分','跟读任意一个场景对话并录音，听自己的发音']},
+  {t:'第 15 周',tasks:['做一套 JLPT N5 模拟题（网上找免费版）','把不认识的词加进词汇闪卡里','继续每天 10 分钟听力']},
+  {t:'第 16 周',tasks:['全部内容总复习：五十音 + 词汇 + 语法 + 会话','再测一次假名和词汇，给自己打分 🎉','制定下一个 3 个月计划：目标 N4！']},
+ ]},
+];
+
+/* ==================================================
+   工具函数
+================================================== */
+const $=s=>document.querySelector(s);
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+
+// 语音朗读（浏览器内置日文 TTS）
+let jaVoice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  jaVoice=vs.find(v=>/^ja(-|_)?JP/i.test(v.lang))||null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged=pickVoice;
+}
+function speak(text){
+  if(!('speechSynthesis' in window))return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='ja-JP';u.rate=0.85;
+    if(jaVoice)u.voice=jaVoice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ==================================================
+   页面路由
+================================================== */
+function go(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  const pg=$('#page-'+p);
+  if(pg)pg.classList.add('active');
+  document.querySelectorAll('.nav-tabs .tab').forEach(t=>t.classList.toggle('active',t.dataset.p===p));
+  location.hash=p;
+  window.scrollTo({top:0});
+  if(p==='progress')renderProgress();
+  if(p==='home')renderHomeStats();
+}
+document.querySelectorAll('.nav-tabs .tab').forEach(t=>t.onclick=()=>go(t.dataset.p));
+// 支持浏览器前进后退 / 直接修改地址栏 hash
+window.addEventListener('hashchange',()=>{
+  const p=(location.hash||'#home').slice(1);
+  const pg=document.getElementById('page-'+p);
+  if(pg&&!pg.classList.contains('active'))go(p);
+});
+
+/* ==================================================
+   五十音
+================================================== */
+let kanaMode='h', showRomaji=true;
+const kata=h=>[...h].map(c=>String.fromCharCode(c.charCodeAt(0)+0x60)).join('');
+const KANA_FLAT=[];
+[KANA_SEI,KANA_DAKU,KANA_YOU].forEach((grp,gi)=>grp.forEach((row,ri)=>row.cells.forEach((c,ci)=>{
+  if(c)KANA_FLAT.push({id:gi+'-'+ri+'-'+ci,h:c[0],r:c[1],grp:gi});
+})));
+
+function setKanaMode(m){
+  kanaMode=m;
+  $('#btnHira').classList.toggle('on',m==='h');
+  $('#btnKata').classList.toggle('on',m==='k');
+  renderKana();
+}
+function toggleRomaji(){
+  showRomaji=!showRomaji;
+  $('#btnRomaji').textContent=showRomaji?'🙈 隐藏罗马音（自测）':'👀 显示罗马音';
+  renderKana();
+}
+function renderKana(){
+  const done=new Set(store.get('jpn_kana',[]));
+  const area=$('#kanaArea');
+  const secs=[
+    {name:'清音',sub:'最基础的 46 个，先攻这里',rows:KANA_SEI},
+    {name:'浊音 · 半浊音',sub:'右上角加两点变浊音，加小圈变半浊音（p）',rows:KANA_DAKU},
+    {name:'拗音',sub:'「い段假名 + 小ゅ/ょ」组成的两拍音，如 きゃ',rows:KANA_YOU},
+  ];
+  area.innerHTML=secs.map((s,si)=>`
+    <div class="kana-sec">
+      <h3>${s.name} <small>${s.sub}</small></h3>
+      <div class="kana-grid ${showRomaji?'':'no-romaji'}">
+        ${s.rows.map((row,ri)=>`
+          <div class="kana-row-label">${row.label}</div>
+          ${[0,1,2,3,4].map(ci=>{
+            const c=row.cells[ci];
+            if(!c)return `<div></div>`;
+            const id=si+'-'+ri+'-'+ci;
+            const isDone=done.has(id);
+            const disp=kanaMode==='h'?c[0]:kata(c[0]);
+            return `<div class="kcell ${isDone?'done':''}" data-id="${id}" data-read="${c[0]}" onclick="kanaClick('${id}','${c[0]}')">
+              <button class="star" title="标记已掌握" onclick="kanaStar(event,'${id}')">⭐</button>
+              <span class="char jp-font">${disp}</span>
+              <span class="rom">${c[1]}</span>
+            </div>`;
+          }).join('')}
+        `).join('')}
+      </div>
+    </div>`).join('');
+  const learned=[...done].filter(id=>KANA_FLAT.some(k=>k.id===id)).length;
+  $('#kanaCount').textContent=`已点亮 ${learned} / ${KANA_FLAT.length} 个`;
+}
+function kanaClick(id,text){
+  speak(text);
+}
+function kanaStar(e,id,noToggle){
+  if(e){e.stopPropagation()}
+  if(!noToggle){
+    const done=new Set(store.get('jpn_kana',[]));
+    done.has(id)?done.delete(id):done.add(id);
+    store.set('jpn_kana',[...done]);
+  }
+  renderKana();
+}
+
+/* ==================================================
+   词汇
+================================================== */
+let curCat=0, hideCn=false, flash=null;
+const VOCAB_TOTAL=VOCAB.reduce((s,c)=>s+c.words.length,0);
+
+function renderCatPills(){
+  $('#catPills').innerHTML=VOCAB.map((c,i)=>
+    `<button class="pill ${i===curCat?'on':''}" onclick="setCat(${i})">${c.name}</button>`).join('');
+}
+function setCat(i){
+  curCat=i;flash=null;
+  $('#flashArea').style.display='none';
+  $('#vocabGrid').style.display='';
+  $('#btnFlash').textContent='🃏 闪卡模式';
+  renderCatPills();renderVocab();
+}
+function renderVocab(){
+  const done=new Set(store.get('jpn_vocab',[]));
+  const cat=VOCAB[curCat];
+  $('#vocabGrid').innerHTML=cat.words.map((w,i)=>{
+    const id=curCat+'-'+i;
+    return `<div class="vcard ${done.has(id)?'done':''}" onclick="speak('${w[0].split(' / ')[0].replace(/'/g,"")}')" title="点击发音">
+      <button class="star" onclick="vocabStar(event,'${id}')" title="标记已背会">⭐</button>
+      <div class="jp jp-font">${w[0]}</div>
+      <div class="kn jp-font">${w[1]}</div>
+      <div class="cn">${w[2]}</div>
+    </div>`;
+  }).join('');
+  const learned=[...done].length;
+  $('#vocabCount').textContent=`本组 ${cat.words.length} 词 · 累计已背 ${learned} / ${VOCAB_TOTAL} 词`;
+}
+function vocabStar(e,id){
+  e.stopPropagation();
+  const done=new Set(store.get('jpn_vocab',[]));
+  done.has(id)?done.delete(id):done.add(id);
+  store.set('jpn_vocab',[...done]);
+  renderVocab();
+}
+function toggleHideCn(){
+  hideCn=!hideCn;
+  $('#btnHideCn').textContent=hideCn?'👀 显示中文意思':'🙈 遮住中文意思（自测）';
+  $('#vocabGrid').classList.toggle('hide-cn',hideCn);
+}
+// 闪卡模式
+function startFlash(){
+  const cat=VOCAB[curCat];
+  flash={list:cat.words,idx:0,flipped:false};
+  $('#vocabGrid').style.display='none';
+  $('#flashArea').style.display='';
+  $('#btnFlash').textContent='✖️ 退出闪卡';
+  renderFlash();
+}
+function renderFlash(){
+  if(!flash)return;
+  const w=flash.list[flash.idx];
+  $('#flashArea').innerHTML=`
+    <div class="flash-wrap">
+      <div class="flash" onclick="flipFlash()">
+        ${flash.flipped
+          ?`<div class="big" style="color:var(--pink-deep)">${w[2]}</div><div class="read">${w[1]}</div>`
+          :`<div class="big jp-font">${w[0]}</div><div class="read jp-font">${w[1]}</div><div class="hint">点卡片看答案</div>`}
+      </div>
+      <div class="flash-ctrl">
+        <button class="btn ghost small" onclick="flashMove(-1)">← 上一个</button>
+        <button class="btn ghost small" onclick="flipFlash()">🔄 翻转</button>
+        <button class="btn ghost small" onclick="flashMove(1)">下一个 →</button>
+      </div>
+      <div class="flash-idx">${flash.idx+1} / ${flash.list.length} · ${VOCAB[curCat].name}</div>
+    </div>`;
+  if(!flash.flipped)speak(w[0].split(' / ')[0]);
+}
+function flipFlash(){flash.flipped=!flash.flipped;renderFlash()}
+function flashMove(d){
+  flash.idx=(flash.idx+d+flash.list.length)%flash.list.length;
+  flash.flipped=false;renderFlash();
+}
+
+/* ==================================================
+   语法
+================================================== */
+function renderGrammar(){
+  $('#grammarList').innerHTML=GRAMMAR.map((g,i)=>`
+    <details class="gram-item">
+      <summary><span class="pt jp-font">${g.t}</span> ${g.title}</summary>
+      <div class="gram-body">
+        <div class="explain">${g.exp}</div>
+        ${g.lines.map(l=>`
+          <div class="ex-line">
+            <button class="spk" onclick="speak('${l[0].replace(/'/g,"")}')" title="朗读">🔊</button>
+            <div><span class="jp-t jp-font">${l[0]}</span><span class="tr">${l[1]} · ${l[2]}</span></div>
+          </div>`).join('')}
+      </div>
+    </details>`).join('');
+}
+
+/* ==================================================
+   会话
+================================================== */
+let curScene=0;
+function renderScenes(){
+  $('#sceneTabs').innerHTML=TALKS.map((t,i)=>
+    `<button class="pill ${i===curScene?'on':''}" onclick="setScene(${i})">${t.name}</button>`).join('');
+  const t=TALKS[curScene];
+  $('#sceneBody').innerHTML=`
+    <div class="scene-note">💡 ${t.note}</div>
+    ${t.lines.map(l=>`
+      <div class="dlg-line">
+        <div class="who">${l[0]}</div>
+        <div class="dlg-bubble">
+          <div class="jp-t jp-font" onclick="speak('${l[1].replace(/'/g,"")}')" title="点击朗读">🔊 ${l[1]}</div>
+          <div class="kn jp-font">${l[2]}</div>
+          <div class="tr">${l[3]}</div>
+        </div>
+      </div>`).join('')}`;
+}
+function setScene(i){curScene=i;renderScenes()}
+
+/* ==================================================
+   测验
+================================================== */
+let quiz=null;
+function bestKey(type){return type==='kana'?'jpn_best_kana':'jpn_best_vocab'}
+function renderBest(){
+  $('#bestKana').textContent=store.get('jpn_best_kana',0);
+  $('#bestVocab').textContent=store.get('jpn_best_vocab',0);
+}
+function startQuiz(type){
+  quiz={type,idx:0,score:0,qs:[]};
+  for(let i=0;i<10;i++)quiz.qs.push(makeQ(type));
+  $('#quizHome').style.display='none';
+  $('#quizResult').style.display='none';
+  $('#quizPlay').style.display='';
+  renderQ();
+}
+function makeQ(type){
+  if(type==='kana'){
+    const k=KANA_FLAT[Math.floor(Math.random()*KANA_FLAT.length)];
+    const opts=shuffle([k.r,...shuffle(KANA_FLAT.filter(x=>x.r!==k.r)).slice(0,3).map(x=>x.r)]);
+    return {prompt:kanaMode==='h'?k.h:kata(k.h),sub:'选出正确的读音',opts,ans:opts.indexOf(k.r)};
+  }else{
+    const ci=Math.floor(Math.random()*VOCAB.length);
+    const wi=Math.floor(Math.random()*VOCAB[ci].words.length);
+    const w=VOCAB[ci].words[wi];
+    const pool=[];
+    VOCAB.forEach(c=>c.words.forEach(x=>{if(x[2]!==w[2])pool.push(x[2])}));
+    const opts=shuffle([w[2],...shuffle(pool).slice(0,3)]);
+    return {prompt:w[0],sub:w[1]+' · 选出正确的中文意思',opts,ans:opts.indexOf(w[2]),jp:w[0]};
+  }
+}
+function renderQ(){
+  const q=quiz.qs[quiz.idx];
+  $('#qNo').textContent=`第 ${quiz.idx+1} 题 / 10`;
+  $('#qBar').style.width=((quiz.idx+1)*10)+'%';
+  $('#qScore').textContent=`得分 ${quiz.score}`;
+  const p=$('#qPrompt');
+  p.textContent=q.prompt;p.classList.toggle('small',quiz.type==='vocab');
+  if(quiz.type==='kana')p.classList.add('jp-font');
+  $('#qSub').textContent=q.sub;
+  $('#qFeed').textContent='';$('#qFeed').className='q-feed';
+  $('#qNext').style.display='none';
+  $('#qOpts').innerHTML=q.opts.map((o,i)=>
+    `<button class="q-opt" onclick="answer(${i})">${o}</button>`).join('');
+  if(q.jp)speak(q.jp.split(' / ')[0]);
+  else speak(q.prompt);
+}
+function answer(i){
+  const q=quiz.qs[quiz.idx];
+  const btns=document.querySelectorAll('.q-opt');
+  btns.forEach(b=>b.style.pointerEvents='none');
+  const ok=i===q.ans;
+  if(ok){quiz.score++;$('#qFeed').textContent='✅ 正确！すごい！';$('#qFeed').className='q-feed ok'}
+  else{
+    btns[q.ans].classList.add('ok');
+    $('#qFeed').textContent=`❌ 正确答案是「${q.opts[q.ans]}」`;$('#qFeed').className='q-feed no';
+  }
+  btns[i].classList.add(ok?'ok':'no');
+  $('#qNext').style.display='';
+  $('#qNext').textContent=quiz.idx===9?'查看结果 🎉':'下一题 →';
+}
+function nextQ(){
+  quiz.idx++;
+  if(quiz.idx>=10){endQuiz();return}
+  renderQ();
+}
+function endQuiz(){
+  const s=quiz.score,type=quiz.type;
+  const best=store.get(bestKey(type),0);
+  const isNew=s>best;
+  if(isNew)store.set(bestKey(type),s);
+  $('#quizPlay').style.display='none';
+  $('#quizResult').style.display='';
+  $('#rScore').textContent=s+'/10';
+  $('#rMsg').textContent=s>=9?'天才？！もう完璧！🎉':s>=7?'做得不错，继续保持！💪':s>=5?'及格啦，错题回去再看看～':'没关系，多测几次就熟了 🌱';
+  $('#rBest').textContent=(isNew?'🎊 新纪录！':'🏆 最佳纪录：'+best+' / 10');
+  renderBest();
+}
+function quitQuiz(){
+  $('#quizPlay').style.display='none';
+  $('#quizResult').style.display='none';
+  $('#quizHome').style.display='';
+}
+
+/* ==================================================
+   学习路线
+================================================== */
+function renderRoadmap(){
+  const done=new Set(store.get('jpn_roadmap',[]));
+  $('#roadmapList').innerHTML=ROADMAP.map((p,pi)=>{
+    const all=p.weeks.reduce((s,w)=>s+w.tasks.length,0);
+    const got=p.weeks.reduce((s,w)=>s+w.tasks.filter(t=>done.has(`${pi}-${p.weeks.indexOf(w)}`)).length,0);
+    const pct=Math.round(got/all*100);
+    return `
+    <div class="phase-card">
+      <div class="phase-head" style="background:linear-gradient(120deg,${p.color},${p.color}cc)">
+        <h2>${p.name}</h2>
+        <div class="goal">${p.goal}</div>
+        <div class="pbar"><i style="width:${pct}%"></i></div>
+      </div>
+      <div class="phase-body">
+        ${p.weeks.map((w,wi)=>`
+          <div class="week">
+            <div class="week-title"><span class="wk">${w.t}</span>${w.tasks.length} 项任务</div>
+            ${w.tasks.map((t,ti)=>{
+              const id=`${pi}-${wi}-${ti}`;
+              return `<label class="task ${done.has(id)?'done':''}">
+                <input type="checkbox" ${done.has(id)?'checked':''} onchange="taskCheck('${id}',this.checked)">${t}
+              </label>`}).join('')}
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+function taskCheck(id,on){
+  const done=new Set(store.get('jpn_roadmap',[]));
+  on?done.add(id):done.delete(id);
+  store.set('jpn_roadmap',[...done]);
+  renderRoadmap();
+}
+
+/* ==================================================
+   打卡与进度
+================================================== */
+function doCheckin(){
+  const days=new Set(store.get('jpn_checkins',[]));
+  const t=todayStr();
+  if(days.has(t))return;
+  days.add(t);
+  store.set('jpn_checkins',[...days]);
+  renderProgress();
+}
+function calcStreak(days){
+  let streak=0;
+  const d=new Date();
+  if(!days.has(todayStr()))d.setDate(d.getDate()-1); // 今天还没打，从昨天起算
+  while(days.has(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'))){
+    streak++;d.setDate(d.getDate()-1);
+  }
+  return streak;
+}
+function renderProgress(){
+  // 打卡日历：最近 28 天
+  const days=new Set(store.get('jpn_checkins',[]));
+  const cal=$('#calGrid');let html='';
+  for(let i=27;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    const hit=days.has(ds);
+    html+=`<div class="day ${hit?'hit':''} ${i===0?'today':''}" title="${ds}">${d.getDate()}</div>`;
+  }
+  cal.innerHTML=html;
+  const t=todayStr();
+  $('#btnCheckin').disabled=days.has(t);
+  $('#btnCheckin').textContent=days.has(t)?'✅ 今天已打卡':'✅ 今日打卡';
+  $('#streakNum').textContent=calcStreak(days);
+  $('#totalDays').textContent=days.size;
+  // 统计
+  const kanaDone=store.get('jpn_kana',[]).length;
+  const vocabDone=store.get('jpn_vocab',[]).length;
+  $('#stKana').textContent=kanaDone+'/'+KANA_FLAT.length;
+  $('#stVocab').textContent=vocabDone+'/'+VOCAB_TOTAL;
+  const bk=store.get('jpn_best_kana',0),bv=store.get('jpn_best_vocab',0);
+  $('#stQuiz').textContent=bk&&bv?Math.round((bk+bv)/2):Math.max(bk,bv);
+  const total=ROADMAP.reduce((s,p)=>s+p.weeks.reduce((a,w)=>a+w.tasks.length,0),0);
+  $('#stRoad').textContent=Math.round(store.get('jpn_roadmap',[]).length/total*100)+'%';
+}
+function resetAll(){
+  if(!confirm('确定要清空全部学习进度吗？此操作无法撤销。'))return;
+  ['jpn_kana','jpn_vocab','jpn_roadmap','jpn_checkins','jpn_best_kana','jpn_best_vocab']
+    .forEach(k=>localStorage.removeItem(k));
+  renderProgress();renderKana();renderVocab();renderRoadmap();renderBest();renderHomeStats();
+}
+
+/* ==================================================
+   首页统计
+================================================== */
+function renderHomeStats(){
+  const kanaDone=store.get('jpn_kana',[]).length;
+  const vocabDone=store.get('jpn_vocab',[]).length;
+  const days=store.get('jpn_checkins',[]).length;
+  const total=ROADMAP.reduce((s,p)=>s+p.weeks.reduce((a,w)=>a+w.tasks.length,0),0);
+  const road=Math.round(store.get('jpn_roadmap',[]).length/total*100);
+  $('#homeStats').innerHTML=`
+    <div class="chip"><b>${days}</b><span>累计打卡天数</span></div>
+    <div class="chip"><b>${kanaDone}/${KANA_FLAT.length}</b><span>假名已点亮</span></div>
+    <div class="chip"><b>${vocabDone}/${VOCAB_TOTAL}</b><span>词汇已掌握</span></div>
+    <div class="chip"><b>${road}%</b><span>路线完成度</span></div>`;
+}
+
+/* ==================================================
+   初始化
+================================================== */
+renderKana();
+renderCatPills();renderVocab();
+renderGrammar();
+renderScenes();
+renderRoadmap();
+renderBest();
+renderHomeStats();
+const start=(location.hash||'#home').slice(1);
+go(document.getElementById('page-'+start)?start:'home');
+</script>
+</body>
+</html>
