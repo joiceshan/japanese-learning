@@ -24,10 +24,11 @@
   --radius:18px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
   background:var(--bg);color:var(--ink);line-height:1.7;
+  overflow-x:clip;
 }
 .jp-font{font-family:"Hiragino Sans","Yu Gothic","Meiryo","Noto Sans JP",sans-serif}
 .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
@@ -145,6 +146,7 @@ section.page{padding:28px 0 70px}
   padding:14px 6px 10px;text-align:center;cursor:pointer;transition:all .15s;user-select:none;
 }
 .kcell:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:0 6px 16px rgba(232,99,140,.15)}
+.kcell.playing{border-color:var(--pink);background:var(--pink-soft);transform:scale(.95)}
 .kcell .char{font-size:27px;line-height:1.2;display:block}
 .kcell .rom{font-size:12px;color:var(--muted);display:block;margin-top:2px}
 .kcell .star{
@@ -284,6 +286,88 @@ section.page{padding:28px 0 70px}
 
 footer{border-top:1px solid var(--line);padding:26px 20px 34px;text-align:center;color:var(--muted);font-size:13px}
 footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
+
+/* ============ 移动端适配 ============ */
+@media(max-width:600px){
+  .wrap{padding:0 15px}
+  .nav-inner{padding:8px 14px;gap:10px}
+  .logo{font-size:17px}
+  .logo .sakura{font-size:19px}
+  .tab{padding:7px 12px;font-size:13.5px}
+  section.page{padding:18px 0 48px}
+  .card{padding:17px 15px;border-radius:16px}
+  .card h2{font-size:18px}
+  .card h3{font-size:15px}
+  .badge{font-size:11px}
+  .page-hero h1{font-size:23px}
+  .page-hero .sub{font-size:13.5px}
+  .hero{padding:16px 0 6px;gap:16px}
+  .hero h1{font-size:27px}
+  .hero p{font-size:14.5px}
+  .chip{padding:9px 12px;min-width:0}
+  .chip b{font-size:19px}
+  .btn{padding:10px 18px;font-size:14.5px}
+  .btn.small{padding:7px 13px;font-size:12.5px}
+  .phase-head{padding:16px}
+  .phase-head h2{font-size:17px}
+  .phase-body{padding:14px 13px 16px}
+  .week{padding:12px 13px}
+  .week-title{font-size:14.5px}
+  .task{font-size:13.5px}
+  .task input{width:18px;height:18px}
+  .kana-grid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+  .kcell{padding:12px 4px 9px}
+  .kcell .char{font-size:24px}
+  .kcell .rom{font-size:11px}
+  .kcell .star{font-size:15px;top:0;right:0;padding:7px}
+  .vgrid{grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:9px}
+  .vcard{padding:13px 10px 10px}
+  .vcard .jp{font-size:19px}
+  .vcard .kn{font-size:12px}
+  .vcard .cn{font-size:13px}
+  .vcard .star{font-size:16px;top:0;right:1px;padding:7px}
+  .flash{padding:34px 18px;min-height:196px}
+  .flash .big{font-size:29px}
+  .flash .read{font-size:15px}
+  .q-prompt{font-size:44px;min-height:64px}
+  .q-prompt.small{font-size:26px}
+  .q-sub{font-size:15px;margin-bottom:18px}
+  .q-opt{padding:13px 10px;font-size:15px}
+  .gram-item summary{padding:13px 15px;font-size:14.5px}
+  .gram-body{padding:2px 15px 15px;font-size:14px}
+  .ex-line{padding:8px 11px;gap:8px}
+  .ex-line .jp-t{font-size:14.5px}
+  .spk{width:34px;height:34px;font-size:14px}
+  .dlg-line{gap:8px}
+  .dlg-line .who{width:52px;font-size:11px}
+  .dlg-bubble{padding:9px 12px}
+  .dlg-bubble .jp-t{font-size:15px}
+  .scene-note{font-size:13px;padding:9px 13px}
+  .checkin-card{gap:16px}
+  .checkin-left{min-width:0}
+  .checkin-left .big-num{font-size:34px}
+  .cal{min-width:0;gap:4px}
+  .cal .day{font-size:10px;border-radius:6px}
+  .stat-grid{gap:10px}
+  .stat-cell{padding:14px 8px}
+  .stat-cell b{font-size:22px}
+  .mnen{padding:12px 14px;font-size:13.5px}
+  .qcard{padding:22px 16px}
+  .qcard .ico{font-size:32px}
+  .routine .row{padding:9px 12px}
+  .routine .row b{min-width:56px;font-size:14px}
+  .tip-list li{font-size:13.5px}
+  footer{padding:22px 15px calc(30px + env(safe-area-inset-bottom))}
+  .nav-inner{padding-left:max(14px, env(safe-area-inset-left));padding-right:max(14px, env(safe-area-inset-right))}
+}
+@media(max-width:370px){
+  .kana-grid{grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:7px}
+  .vgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+  .hero h1{font-size:24px}
+  .q-prompt{font-size:38px}
+  .tab{padding:6px 10px;font-size:12.5px}
+  .logo{font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -842,24 +926,65 @@ function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.fl
 const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 
 // 语音朗读（浏览器内置日文 TTS）
-let jaVoice=null;
+let jaVoice=null, voicesLoaded=false, warnedNoVoice=false, curUtter=null;
+function jaVoices(){ try{ return speechSynthesis.getVoices()||[] }catch(e){ return [] } }
 function pickVoice(){
-  const vs=speechSynthesis.getVoices();
-  jaVoice=vs.find(v=>/^ja(-|_)?JP/i.test(v.lang))||null;
+  const vs=jaVoices();
+  if(vs.length)voicesLoaded=true;
+  jaVoice=vs.find(v=>/^ja/i.test(v.lang||''))||null;
 }
 if('speechSynthesis' in window){
   pickVoice();
   speechSynthesis.onvoiceschanged=pickVoice;
+  // iOS Safari 要求首次朗读发生在用户手势的同步上下文里；先用手势静默预热引擎
+  const unlock=()=>{
+    document.removeEventListener('touchend',unlock);
+    document.removeEventListener('click',unlock);
+    try{
+      // 真实发音已在播放就跳过，避免把刚触发的发音掐掉
+      if(speechSynthesis.speaking||speechSynthesis.pending)return;
+      const u=new SpeechSynthesisUtterance(' ');
+      u.volume=0;u.lang='ja-JP';
+      if(jaVoice)u.voice=jaVoice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  };
+  document.addEventListener('touchend',unlock);
+  document.addEventListener('click',unlock);
+}
+// 语音不可用时给出可见提示，而不是静默失败
+let toastTimer=null;
+function showToast(msg){
+  let el=document.getElementById('ttsToast');
+  if(!el){
+    el=document.createElement('div');
+    el.id='ttsToast';
+    el.style.cssText='position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);'
+      +'z-index:99;background:rgba(58,48,66,.94);color:#fff;font-size:13.5px;line-height:1.6;padding:11px 18px;'
+      +'border-radius:12px;max-width:86vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);'
+      +'transition:opacity .35s;opacity:0;pointer-events:none;';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg;
+  el.style.opacity='1';
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{ el.style.opacity='0' },3600);
 }
 function speak(text){
-  if(!('speechSynthesis' in window))return;
+  if(!('speechSynthesis' in window)){ showToast('当前浏览器不支持朗读，建议用 Chrome 或 Safari 打开'); return }
+  if(voicesLoaded&&!jaVoice&&!warnedNoVoice){
+    warnedNoVoice=true;
+    showToast('这台设备没装日文语音包，发音可能不准。可在系统「语言与输入法」里添加日语语音。');
+  }
   try{
-    speechSynthesis.cancel();
+    if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel();
+    if(speechSynthesis.paused)speechSynthesis.resume();
     const u=new SpeechSynthesisUtterance(text);
-    u.lang='ja-JP';u.rate=0.85;
+    u.lang='ja-JP';u.rate=0.8;u.pitch=1;u.volume=1;
     if(jaVoice)u.voice=jaVoice;
+    curUtter=u;   // 保持引用，避免被垃圾回收导致无声
     speechSynthesis.speak(u);
-  }catch(e){}
+  }catch(e){ showToast('朗读失败，请再点一次试试') }
 }
 
 /* ==================================================
@@ -938,6 +1063,8 @@ function renderKana(){
 }
 function kanaClick(id,text){
   speak(text);
+  const el=document.querySelector('.kcell[data-id="'+id+'"]');
+  if(el){ el.classList.add('playing'); setTimeout(()=>el.classList.remove('playing'),600) }
 }
 function kanaStar(e,id,noToggle){
   if(e){e.stopPropagation()}
