@@ -936,21 +936,26 @@ function pickVoice(){
 if('speechSynthesis' in window){
   pickVoice();
   speechSynthesis.onvoiceschanged=pickVoice;
-  // iOS Safari 要求首次朗读发生在用户手势的同步上下文里；先用手势静默预热引擎
-  const unlock=()=>{
-    document.removeEventListener('touchend',unlock);
-    document.removeEventListener('click',unlock);
-    try{
-      // 真实发音已在播放就跳过，避免把刚触发的发音掐掉
-      if(speechSynthesis.speaking||speechSynthesis.pending)return;
-      const u=new SpeechSynthesisUtterance(' ');
-      u.volume=0;u.lang='ja-JP';
-      if(jaVoice)u.voice=jaVoice;
-      speechSynthesis.speak(u);
-    }catch(e){}
-  };
-  document.addEventListener('touchend',unlock);
-  document.addEventListener('click',unlock);
+  // iOS Safari 要求首次朗读发生在用户手势的同步上下文里，需要用一次静默朗读预热引擎；
+  // Android 不需要，而且这次静默朗读会让引擎停留在 pending，反而把它之后的真实朗读掐掉。
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)
+    ||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(isIOS){
+    const unlock=()=>{
+      document.removeEventListener('touchend',unlock);
+      document.removeEventListener('click',unlock);
+      try{
+        // 真实发音已在播放就跳过，避免把刚触发的发音掐掉
+        if(speechSynthesis.speaking||speechSynthesis.pending)return;
+        const u=new SpeechSynthesisUtterance('');
+        u.volume=0;u.lang='ja-JP';
+        if(jaVoice)u.voice=jaVoice;
+        speechSynthesis.speak(u);
+      }catch(e){}
+    };
+    document.addEventListener('touchend',unlock);
+    document.addEventListener('click',unlock);
+  }
 }
 // 语音不可用时给出可见提示，而不是静默失败
 let toastTimer=null;
@@ -970,21 +975,36 @@ function showToast(msg){
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>{ el.style.opacity='0' },3600);
 }
-function speak(text){
-  if(!('speechSynthesis' in window)){ showToast('当前浏览器不支持朗读，建议用 Chrome 或 Safari 打开'); return }
-  if(voicesLoaded&&!jaVoice&&!warnedNoVoice){
-    warnedNoVoice=true;
-    showToast('这台设备没装日文语音包，发音可能不准。可在系统「语言与输入法」里添加日语语音。');
-  }
+function doSpeak(text){
   try{
-    if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel();
-    if(speechSynthesis.paused)speechSynthesis.resume();
     const u=new SpeechSynthesisUtterance(text);
     u.lang='ja-JP';u.rate=0.8;u.pitch=1;u.volume=1;
     if(jaVoice)u.voice=jaVoice;
+    u.onerror=ev=>{
+      const e=(ev&&ev.error)||'';
+      if(e==='interrupted'||e==='canceled')return;
+      showToast('朗读失败（'+e+'）。请在系统「设置 → 语言与输入法 → 文字转语音」里安装日语语音包');
+    };
     curUtter=u;   // 保持引用，避免被垃圾回收导致无声
     speechSynthesis.speak(u);
   }catch(e){ showToast('朗读失败，请再点一次试试') }
+}
+function speak(text){
+  if(!('speechSynthesis' in window)){ showToast('当前浏览器不支持朗读，建议用 Chrome 或 Safari 打开'); return }
+  if(!voicesLoaded)pickVoice();
+  if(!jaVoice&&jaVoices().length&&!warnedNoVoice){
+    warnedNoVoice=true;
+    showToast('这台设备没装日文语音包，发音可能不准。可在系统「语言与输入法」里添加日语语音。');
+  }
+  // Android Chrome 在 cancel() 之后立刻 speak() 会被静默丢弃，必须留出间隔；
+  // 没有正在播放时同步 speak()，以保留 iOS 的手势上下文。
+  if(speechSynthesis.speaking||speechSynthesis.pending){
+    try{ speechSynthesis.cancel() }catch(e){}
+    setTimeout(()=>{ try{ if(speechSynthesis.paused)speechSynthesis.resume() }catch(e){} doSpeak(text) },130);
+  }else{
+    try{ if(speechSynthesis.paused)speechSynthesis.resume() }catch(e){}
+    doSpeak(text);
+  }
 }
 
 /* ==================================================
