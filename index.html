@@ -287,6 +287,30 @@ section.page{padding:28px 0 70px}
 footer{border-top:1px solid var(--line);padding:26px 20px 34px;text-align:center;color:var(--muted);font-size:13px}
 footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
 
+/* ============ 新手引导 / 讲解增强 ============ */
+.start-card{background:linear-gradient(135deg,#fff7fa,#f2f7fd);border:1px solid #f6d3e0;border-radius:var(--radius);padding:22px;margin-top:4px;box-shadow:var(--shadow)}
+.start-card h2{font-size:20px;margin-bottom:4px}
+.start-card .sc-lead{color:var(--muted);font-size:14px;margin-bottom:16px}
+.sc-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sc-step{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:16px 15px 14px;cursor:pointer;transition:all .2s}
+.sc-step:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,99,140,.15)}
+.sc-step .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--pink);color:#fff;font-weight:800;font-size:14px;margin-bottom:8px}
+.sc-step b{display:block;font-size:15.5px;margin-bottom:5px}
+.sc-step p{font-size:13px;color:#6d6178;line-height:1.6;margin-bottom:10px}
+.sc-step .go{font-size:13px;font-weight:700;color:var(--pink-deep)}
+.kcell .mn{display:none;font-size:10.5px;color:var(--pink-deep);line-height:1.35;margin-top:3px}
+.kana-grid.show-mn .kcell .mn{display:block}
+.order-demo{display:grid;gap:8px;margin:14px 0 6px}
+.order-demo .orow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.order-demo .lang{font-size:12px;font-weight:800;color:var(--muted);min-width:42px}
+.order-demo .seg{display:inline-block;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:5px 11px;font-size:15px}
+.order-demo .seg.hl{border-color:var(--pink);background:var(--pink-soft);font-weight:700}
+.order-demo .small{font-size:12.5px;color:var(--muted)}
+.formula{background:var(--matcha-soft);border:1px dashed #bcd9b2;border-radius:12px;padding:10px 14px;margin:8px 0 12px;font-size:14.5px}
+.formula b{color:var(--matcha)}
+.why-box{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:12px;font-size:13.5px;color:#7a5a1e}
+.ex-mean{display:block;font-size:13px;color:#6d6178;margin-top:3px}
+
 /* ============ 移动端适配 ============ */
 @media(max-width:600px){
   .wrap{padding:0 15px}
@@ -359,6 +383,14 @@ footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
   .tip-list li{font-size:13.5px}
   footer{padding:22px 15px calc(30px + env(safe-area-inset-bottom))}
   .nav-inner{padding-left:max(14px, env(safe-area-inset-left));padding-right:max(14px, env(safe-area-inset-right))}
+  .sc-steps{grid-template-columns:1fr;gap:10px}
+  .sc-step{padding:14px 14px 12px}
+  .start-card{padding:18px 15px}
+  .start-card h2{font-size:18px}
+  .order-demo .seg{padding:5px 9px;font-size:14px}
+  .formula{padding:9px 12px;font-size:13.5px}
+  .why-box{font-size:13px;padding:9px 12px}
+  .kcell .mn{font-size:9.5px}
 }
 @media(max-width:370px){
   .kana-grid{grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:7px}
@@ -410,6 +442,34 @@ footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
       <div class="card feature" onclick="go('vocab')"><span class="ico">📚</span><b>150+ 核心词汇</b><p>分类记忆 + 闪卡模式</p></div>
       <div class="card feature" onclick="go('grammar')"><span class="ico">✏️</span><b>入门语法</b><p>12 个 N5 语法点，一看就懂</p></div>
       <div class="card feature" onclick="go('quiz')"><span class="ico">🎯</span><b>趣味测验</b><p>假名、词汇随时检验</p></div>
+    </div>
+
+    <div class="start-card">
+      <h2>🌱 第一次来？跟着这 3 步走</h2>
+      <div class="sc-lead">完全不懂日语也没关系。按顺序点这三张卡片，10 分钟就能读出你的第一批日语。</div>
+      <div class="sc-steps">
+        <div class="sc-step" onclick="go('kana')">
+          <span class="n">1</span>
+          <b>先认 5 个假名</b>
+          <p>打开「五十音」，点第一行 <b>あ い う え お</b> 听发音，跟着念出来。日语一共就这 5 个元音打底。</p>
+          <span class="go">去五十音 →</span>
+        </div>
+        <div class="sc-step" onclick="go('vocab')">
+          <span class="n">2</span>
+          <b>跟读 5 个常用词</b>
+          <p>打开「词汇 · 问候语」，点卡片听发音，先记住「こんにちは（你好）」「ありがとう（谢谢）」。</p>
+          <span class="go">去词汇 →</span>
+        </div>
+        <div class="sc-step" onclick="go('quiz')">
+          <span class="n">3</span>
+          <b>做一局小测验</b>
+          <p>打开「测验」，选「假名测验」做 10 题，1 分钟就能检验今天学会了多少。</p>
+          <span class="go">去测验 →</span>
+        </div>
+      </div>
+      <div class="mnem" style="background:var(--matcha-soft);color:#3f6b33">
+        ✅ 能读完上面 3 步，你就正式入门了。接下来跟着「学习路线」每周走一小格，四个月后能读懂简单对话。
+      </div>
     </div>
 
     <div class="grid g2" style="margin-top:4px">
@@ -470,13 +530,28 @@ footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
         <button id="btnKata" onclick="setKanaMode('k')">片假名</button>
       </div>
       <button class="btn ghost small" id="btnRomaji" onclick="toggleRomaji()">🙈 隐藏罗马音（自测）</button>
+      <button class="btn ghost small" id="btnMnemo" onclick="toggleMnemo()">🧠 显示谐音口诀</button>
       <span style="font-size:13px;color:var(--muted)" id="kanaCount"></span>
     </div>
+    <details class="gram-item" style="margin-bottom:16px">
+      <summary><span class="pt">📖</span> 零基础先看这里：假名到底怎么读</summary>
+      <div class="gram-body">
+        <div class="why-box">日语只有 <b>5 个元音</b>：a i u e o。所有假名都是「辅音 + 元音」拼出来的，比如 か = k + a。先把这 5 个元音读准，后面全靠它们打底。</div>
+        <ul class="tip-list">
+          <li><b>口型要小、要短</b>：中文的「啊——」又长又夸张，日语的 あ 更短、嘴张得更小；う 要嘴唇放平，<b>不能像中文那样撅嘴</b>。</li>
+          <li><b>3 个最容易读错的音</b>：し 读「西」(xi)，不读「思」；ち 读「七」(qi)，不读「吃」；つ 是快速的「次」（带 t 音）。</li>
+          <li><b>ら行 r</b>：介于中文的 l 和 r 之间，舌尖轻轻弹一下，别卷舌。</li>
+          <li><b>を</b>：只当助词用，读音就是 o；<b>は</b> 当助词时读 wa（不是 ha）。</li>
+          <li><b>长音 / 促音 / 拨音</b>：おばあさん（奶奶）比 おばさん（阿姨）多拖一拍；がっこう（学校）中间要停顿一拍；ん 是鼻音，也占一拍。</li>
+          <li><b>怎么记最快</b>：点上面的「🧠 显示谐音口诀」，每个假名下会出现中文谐音（あ≈啊、い≈衣），先用中文音锚住，再点卡片听正确发音微调。</li>
+        </ul>
+      </div>
+    </details>
     <div id="kanaArea"></div>
     <div class="mnem">
-      💡 <b>记忆小妙招</b>：不用一次背完！每天只攻 1～2 行（5～10 个），
-      结合词来记更容易——比如记住 <b>あめ</b>(雨)、<b>すし</b>(寿司)、<b>ねこ</b>(猫) 这些词，
-      假名自然就记住了。片假名主要是用来写外来语的，比如 <b>コーヒー</b>(coffee 咖啡)。
+      💡 <b>记忆小妙招</b>：不用一次背完！每天只攻 1～2 行（5～10 个），结合词来记更容易——
+      记住 <b>あめ</b>(雨)、<b>すし</b>(寿司)、<b>ねこ</b>(猫) 这些词，假名自然就记住了。
+      片假名主要是用来写外来语的，比如 <b>コーヒー</b>(coffee 咖啡)。
     </div>
   </div>
 </section>
@@ -507,6 +582,15 @@ footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
       <span class="badge" style="background:var(--gold-soft);color:var(--gold)">N5 入门 12 讲</span>
       <h1>✏️ 基础语法</h1>
       <div class="sub">每讲 2 分钟看完。点击例句可以听发音。建议配合路线图每周学 2～3 讲。</div>
+    </div>
+    <div class="card" style="background:var(--aoi-soft);border-color:#d9e5f2">
+      <h2>🧭 先搞懂一件事：日语语序和中文不一样</h2>
+      <p style="font-size:14.5px;color:#41597d">中文是「我 <b>吃</b> 饭」，动词在中间；日语是「我 <b>饭</b> 吃」，<b>动词永远放在句子最后</b>。所以听日语，重点听句尾。</p>
+      <div class="order-demo">
+        <div class="orow"><span class="lang">中文</span><span class="seg">我</span><span class="seg hl">吃</span><span class="seg">饭</span><span class="small">← 动词在中间</span></div>
+        <div class="orow"><span class="lang">日语</span><span class="seg">私は</span><span class="seg">ご飯を</span><span class="seg hl">食べる</span><span class="small">← 动词在最后</span></div>
+      </div>
+      <p style="font-size:14px;color:#41597d;margin-top:10px">夹在中间的小符号「は · を · に · で · が」叫 <b>助词</b>，它们像路牌一样标出「谁、对什么、在哪、做什么」。日语靠助词而不是靠位置来决定意思——所以下面的 12 讲，就是把这几个路牌一个个认全。</p>
     </div>
     <div id="grammarList"></div>
   </div>
@@ -612,19 +696,19 @@ footer .jp-t{font-weight:700;color:var(--pink-deep);font-size:15px}
 /* ==================================================
    数据区
 ================================================== */
-// 五十音：清音
+// 五十音：清音（第三项是中文谐音口诀，帮助零基础记忆）
 const KANA_SEI=[
-  {label:'あ行',cells:[['あ','a'],['い','i'],['う','u'],['え','e'],['お','o']]},
-  {label:'か行',cells:[['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko']]},
-  {label:'さ行',cells:[['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so']]},
-  {label:'た行',cells:[['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to']]},
-  {label:'な行',cells:[['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no']]},
-  {label:'は行',cells:[['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho']]},
-  {label:'ま行',cells:[['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo']]},
-  {label:'や行',cells:[['や','ya'],null,['ゆ','yu'],null,['よ','yo']]},
-  {label:'ら行',cells:[['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro']]},
-  {label:'わ行',cells:[['わ','wa'],null,null,null,['を','wo']]},
-  {label:'拨音',cells:[['ん','n']]},
+  {label:'あ行',cells:[['あ','a','啊'],['い','i','衣'],['う','u','乌（嘴放平）'],['え','e','诶'],['お','o','哦']]},
+  {label:'か行',cells:[['か','ka','咖'],['き','ki','奇'],['く','ku','哭'],['け','ke','开'],['こ','ko','考']]},
+  {label:'さ行',cells:[['さ','sa','撒'],['し','shi','西（不读"思"）'],['す','su','丝'],['せ','se','塞'],['そ','so','嗦']]},
+  {label:'た行',cells:[['た','ta','他'],['ち','chi','七（不读"吃"）'],['つ','tsu','次（带 t 音）'],['て','te','贴'],['と','to','托']]},
+  {label:'な行',cells:[['な','na','那'],['に','ni','你'],['ぬ','nu','奴'],['ね','ne','呢'],['の','no','诺']]},
+  {label:'は行',cells:[['は','ha','哈'],['ひ','hi','嘻'],['ふ','fu','呼（双唇轻吹）'],['へ','he','嘿'],['ほ','ho','吼']]},
+  {label:'ま行',cells:[['ま','ma','妈'],['み','mi','米'],['む','mu','木'],['め','me','妹'],['も','mo','摸']]},
+  {label:'や行',cells:[['や','ya','呀'],null,['ゆ','yu','优'],null,['よ','yo','哟']]},
+  {label:'ら行',cells:[['ら','ra','拉（舌尖轻弹）'],['り','ri','利'],['る','ru','鲁'],['れ','re','咧'],['ろ','ro','罗']]},
+  {label:'わ行',cells:[['わ','wa','哇'],null,null,null,['を','wo','哦（只作助词）']]},
+  {label:'拨音',cells:[['ん','n','嗯（鼻音）']]},
 ];
 // 浊音 / 半浊音
 const KANA_DAKU=[
@@ -808,47 +892,71 @@ const VOCAB=[
 
 // 语法（N5 入门 12 讲）
 const GRAMMAR=[
- {t:'です',title:'……是……',exp:'最基础的判断词，放在句尾表示"是"，自带礼貌语气。',
+ {t:'です',title:'……是……',formula:'【A は B です】＝ A 是 B',
+  why:'"是"这个判断在日语里要放到句子最后，用 です 收尾，这样说话自带礼貌。它的否定不是加"不"，而是把 です 换成 じゃありません。',
+  exp:'最基础的判断词，放在句尾表示"是"，自带礼貌语气。',
   lines:[['私は学生です。','Watashi wa gakusei desu.','我是学生。'],
          ['田中さんは先生です。','Tanaka-san wa sensei desu.','田中先生是老师。'],
          ['先生じゃありません。','Sensei ja arimasen.','不是老师。（否定形式）']]},
- {t:'は',title:'主题标记「要说的是……」',exp:'放在主题后面，标记"接下来要聊这个"。注意：这里读 wa 不读 ha！',
+ {t:'は',title:'主题标记「要说的是……」',formula:'【A は ……】＝ 接下来要聊 A',
+  why:'中文靠语序表意，日语靠"路牌"。は 就是那块提示牌：它前面的是"话题"，后面才是对这个话题的说明。当助词时读 wa，不读 ha。',
+  exp:'放在主题后面，标记"接下来要聊这个"。注意：这里读 wa 不读 ha！',
   lines:[['私はリンです。','Watashi wa Rin desu.','我是小林。'],
          ['これは本です。','Kore wa hon desu.','这是书。']]},
- {t:'か',title:'句尾一加，变成疑问',exp:'放在句尾表示疑问，相当于"……吗？"，不用加问号，语调也不必上扬。',
+ {t:'か',title:'句尾一加，变成疑问',formula:'【…… ですか】＝ ……吗？',
+  why:'日语不需要把句子改成"疑问句式"，只要句尾加一个 か，语序一点不用动就变成了提问。所以听到句尾的 か，就是在问你。',
+  exp:'放在句尾表示疑问，相当于"……吗？"，不用加问号，语调也不必上扬。',
   lines:[['あなたは学生ですか。','Anata wa gakusei desu ka.','你是学生吗？'],
          ['これはいくらですか。','Kore wa ikura desu ka.','这个多少钱？']]},
- {t:'の',title:'「的」——表示所属',exp:'连接两个名词，前面的名词修饰后面的名词。',
+ {t:'の',title:'「的」——表示所属',formula:'【A の B】＝ A 的 B',
+  why:'和中文的"的"几乎一模一样，前面的名词修饰后面的名词。中文"我的书"→ 私の本，顺序完全一致，是最好上手的助词。',
+  exp:'连接两个名词，前面的名词修饰后面的名词。',
   lines:[['私の本','watashi no hon','我的书'],
          ['日本語の先生','nihongo no sensei','日语老师'],
          ['学校の友達','gakkou no tomodachi','学校的朋友']]},
- {t:'を',title:'动作的「对象」',exp:'标记动作承受的东西（他动词的对象），读作 o。',
+ {t:'を',title:'动作的「对象」',formula:'【A を ＋ 动词】＝ 把 A 怎么样',
+  why:'を 标出"动作直接作用在谁身上"，读作 o。它的位置固定在动词前面，所以一看到 を，就知道后面那个动词是冲它来的。',
+  exp:'标记动作承受的东西（他动词的对象），读作 o。',
   lines:[['パンを食べます。','Pan o tabemasu.','吃面包。'],
          ['水を飲みます。','Mizu o nomimasu.','喝水。'],
          ['日本語を勉強します。','Nihongo o benkyou shimasu.','学日语。']]},
- {t:'に',title:'时间点 · 去向',exp:'表示动作发生的时间点，或移动的目的地。',
+ {t:'に',title:'时间点 · 去向',formula:'【时间 / 目的地 ＋ に ＋ 动词】',
+  why:'に 有两个最常用法：接在钟点后（7時に＝在 7 点），和表示移动的终点（学校に＝去学校）。小坑：星期几要用 に，但"今天、明天"这类相对时间后面不加 に。',
+  exp:'表示动作发生的时间点，或移动的目的地。',
   lines:[['7時に起きます。','Shichi-ji ni okimasu.','7点起床。'],
          ['学校に行きます。','Gakkou ni ikimasu.','去学校。'],
          ['日本に行きたいです。','Nihon ni ikitai desu.','想去日本。']]},
- {t:'で',title:'在哪里做 · 用什么做',exp:'表示动作发生的场所，或使用的工具、手段。',
+ {t:'で',title:'在哪里做 · 用什么做',formula:'【地点 / 工具 ＋ で ＋ 动词】',
+  why:'で 和 に 最容易混：に 是"移动到的地方"，で 是"动作发生的地方"。図書館で勉強＝在图书馆学；図書館に行く＝去图书馆。で 还能表示"用什么做"：バスで行く＝坐公交去。',
+  exp:'表示动作发生的场所，或使用的工具、手段。',
   lines:[['図書館で勉強します。','Toshokkan de benkyou shimasu.','在图书馆学习。'],
          ['バスで行きます。','Basu de ikimasu.','坐公交去。'],
          ['はしで食べます。','Hashi de tabemasu.','用筷子吃。']]},
- {t:'が',title:'存在 · 好恶的对象',exp:'表示"有什么东西存在"，或用于好き（喜欢）、上手（擅长）等情感能力的对象。',
+ {t:'が',title:'存在 · 好恶的对象',formula:'【A が ＋ います / あります / 好き】',
+  why:'が 用于"存在"（有…）和"喜好 / 能力"的对象。中文说"我喜欢水"，日语把"喜欢"当成形容词，所以用 が 把喜欢的对象引出来：水が好きです。',
+  exp:'表示"有什么东西存在"，或用于好き（喜欢）、上手（擅长）等情感能力的对象。',
   lines:[['猫がいます。','Neko ga imasu.','有猫。'],
          ['水が好きです。','Mizu ga suki desu.','喜欢水。'],
          ['日本語が上手です。','Nihongo ga jouzu desu.','日语很棒。']]},
- {t:'も',title:'「也」',exp:'表示"也"，直接替换は的位置。',
+ {t:'も',title:'「也」',formula:'【A も ……】＝ A 也……',
+  why:'"也"最省事：把 は 直接换成 も，句子其他部分一个字都不用改。私も学生です＝我也是学生。',
+  exp:'表示"也"，直接替换は的位置。',
   lines:[['私も学生です。','Watashi mo gakusei desu.','我也是学生。'],
          ['コーヒーもお願いします。','Koohii mo onegaishimasu.','咖啡也麻烦来一份。']]},
- {t:'と',title:'「和」——连接名词',exp:'把两个名词并列起来。',
+ {t:'と',title:'「和」——连接名词',formula:'【A と B】＝ A 和 B',
+  why:'相当于中文的"和"，但它只能连接名词，不能连接两个句子。想表达"我看电影和听音乐"这种，要用别的方式，别硬套 と。',
+  exp:'把两个名词并列起来。',
   lines:[['犬と猫','inu to neko','狗和猫'],
          ['母と姉がいます。','Haha to ane ga imasu.','有妈妈和姐姐。']]},
- {t:'ます形',title:'动词的礼貌形（现在/过去/否定）',exp:'动词接ます是礼貌说法。否定把ます换成ません，过去式换成ました。',
+ {t:'ます形',title:'动词的礼貌形（现在/过去/否定）',formula:'现在 ます ｜ 否定 ません ｜ 过去 ました ｜ 过去否定 ませんでした',
+  why:'日语的时态和否定全靠句尾变化，动词本身不挪位置。记不住就先背这一组"尾巴"：ます / ません / ました / ませんでした——只背这四个，就能应付一整个 N5。',
+  exp:'动词接ます是礼貌说法。否定把ます换成ません，过去式换成ました。',
   lines:[['毎日日本語を勉強します。','Mainichi nihongo o benkyou shimasu.','每天学日语。'],
          ['昨日映画を見ました。','Kinou eiga o mimashita.','昨天看了电影。'],
          ['朝ご飯は食べません。','Asagohan wa tabemasen.','不吃早饭。']]},
- {t:'形容词',title:'い形容词 / な形容词作谓语',exp:'い形容词直接加です；な形容词和名词一样直接加です。否定变化先记最常用的即可。',
+ {t:'形容词',title:'い形容词 / な形容词作谓语',formula:'い形容词 ＋ です ｜ な形容词（去掉な）＋ です',
+  why:'两种形容词接法不同：い形容词本身就带"い"（高い），直接加 です；な形容词要先去掉 な 再加 です（静か → 静かです）。否定时 い形容词去掉 い 加 くない：高い → 高くない。',
+  exp:'い形容词直接加です；な形容词和名词一样直接加です。否定变化先记最常用的即可。',
   lines:[['この本は高いです。','Kono hon wa takai desu.','这本书很贵。'],
          ['ここは静かです。','Koko wa shizuka desu.','这里很安静。'],
          ['今日は暑くないです。','Kyou wa atsuku nai desu.','今天不热。']]},
@@ -1072,7 +1180,7 @@ window.addEventListener('hashchange',()=>{
 /* ==================================================
    五十音
 ================================================== */
-let kanaMode='h', showRomaji=true;
+let kanaMode='h', showRomaji=true, showMnemo=false;
 const kata=h=>[...h].map(c=>String.fromCharCode(c.charCodeAt(0)+0x60)).join('');
 const KANA_FLAT=[];
 [KANA_SEI,KANA_DAKU,KANA_YOU].forEach((grp,gi)=>grp.forEach((row,ri)=>row.cells.forEach((c,ci)=>{
@@ -1090,6 +1198,12 @@ function toggleRomaji(){
   $('#btnRomaji').textContent=showRomaji?'🙈 隐藏罗马音（自测）':'👀 显示罗马音';
   renderKana();
 }
+function toggleMnemo(){
+  showMnemo=!showMnemo;
+  $('#btnMnemo').classList.toggle('on',showMnemo);
+  $('#btnMnemo').textContent=showMnemo?'🔤 收起谐音口诀':'🧠 显示谐音口诀';
+  renderKana();
+}
 function renderKana(){
   const done=new Set(store.get('jpn_kana',[]));
   const area=$('#kanaArea');
@@ -1101,7 +1215,7 @@ function renderKana(){
   area.innerHTML=secs.map((s,si)=>`
     <div class="kana-sec">
       <h3>${s.name} <small>${s.sub}</small></h3>
-      <div class="kana-grid ${showRomaji?'':'no-romaji'}">
+      <div class="kana-grid ${showRomaji?'':'no-romaji'} ${showMnemo?'show-mn':''}">
         ${s.rows.map((row,ri)=>`
           <div class="kana-row-label">${row.label}</div>
           ${[0,1,2,3,4].map(ci=>{
@@ -1114,6 +1228,7 @@ function renderKana(){
               <button class="star" title="标记已掌握" onclick="kanaStar(event,'${id}')">⭐</button>
               <span class="char jp-font">${disp}</span>
               <span class="rom">${c[1]}</span>
+              ${c[2]?`<span class="mn">${c[2]}</span>`:''}
             </div>`;
           }).join('')}
         `).join('')}
@@ -1223,6 +1338,8 @@ function renderGrammar(){
     <details class="gram-item">
       <summary><span class="pt jp-font">${g.t}</span> ${g.title}</summary>
       <div class="gram-body">
+        ${g.formula?`<div class="formula"><b>结构</b>：${g.formula}</div>`:''}
+        ${g.why?`<div class="why-box">💡 <b>为什么这么用</b>：${g.why}</div>`:''}
         <div class="explain">${g.exp}</div>
         ${g.lines.map(l=>`
           <div class="ex-line">
